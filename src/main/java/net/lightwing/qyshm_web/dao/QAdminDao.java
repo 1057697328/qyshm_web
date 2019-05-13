@@ -1,16 +1,30 @@
 package net.lightwing.qyshm_web.dao;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import java.util.List;
 import net.lightwing.qyshm_web.pojo.QAdmin;
-import org.apache.ibatis.annotations.Mapper;
+import net.lightwing.qyshm_web.pojo.QAdminExample;
+import org.apache.ibatis.annotations.Param;
 
-/**
- * @author : clarence
- * 创建时间 : 2019-05-13
- * 长沙轻翼网络科技有限公司
- */
-@Mapper
-public interface QAdminDao extends BaseMapper<QAdmin>
-{
+public interface QAdminDao {
+    long countByExample(QAdminExample example);
 
+    int deleteByExample(QAdminExample example);
+
+    int deleteByPrimaryKey(Integer aid);
+
+    int insert(QAdmin record);
+
+    int insertSelective(QAdmin record);
+
+    List<QAdmin> selectByExample(QAdminExample example);
+
+    QAdmin selectByPrimaryKey(Integer aid);
+
+    int updateByExampleSelective(@Param("record") QAdmin record, @Param("example") QAdminExample example);
+
+    int updateByExample(@Param("record") QAdmin record, @Param("example") QAdminExample example);
+
+    int updateByPrimaryKeySelective(QAdmin record);
+
+    int updateByPrimaryKey(QAdmin record);
 }
