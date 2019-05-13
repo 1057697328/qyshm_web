@@ -12,13 +12,21 @@
     <artifactId>qyshm_web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>qyshm_web</name>
-    <description>Demo project for Spring Boot</description>
+    <description>起源生命科技(深圳)有限公司官网前台端</description>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
+
+        <!--引入Mybatis Plus-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>

@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/qyshm_db?useUnicode=true&allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    username: root
+    password: yan201019
+
+mybatis-plus:
+  mapper-locations: classpath:/mybatis/mappers/*.xml
+  type-aliases-package: net.lightwing.qyshm_web.pojo
+
+logging:
+  level:
+    net.lightwing.qyshm_web.dao: DEBUG
