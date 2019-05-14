@@ -38,7 +38,7 @@ public class QTeamController {
 
     @RequestMapping("insert")
     @ResponseBody
-    public Wrapper insert(@RequestBody QTeam qTeam, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper insert(QTeam qTeam, @RequestParam("imgFile") MultipartFile file) {
         List<QTeam> qTeamList = qTeamService.selectByName(qTeam.getName());
         if (qTeamList.size() > 0) {
             return WrapMapper.ok().message("该人员姓名已存在");
@@ -60,7 +60,7 @@ public class QTeamController {
 
     @RequestMapping("update")
     @ResponseBody
-    public Wrapper update(@RequestBody QTeam qTeam, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper update(QTeam qTeam, @RequestParam("imgFile") MultipartFile file) {
         if (StringUtils.isNotBlank(file.getOriginalFilename())) {
             qTeam.setTheadimg(null);
             if (qTeam.getTheadimg() != null) {

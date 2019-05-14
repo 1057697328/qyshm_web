@@ -38,7 +38,7 @@ public class QNewsController {
 
     @RequestMapping("insert")
     @ResponseBody
-    public Wrapper insert(@RequestBody QNews qNews, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper insert(QNews qNews, @RequestParam("imgFile") MultipartFile file) {
         List<QNews> qCoopTypeList = qNewsService.selectByName(qNews.getNtitle());
         if (qCoopTypeList.size() > 0) {
             return WrapMapper.ok().message("该新闻标题已存在");
@@ -60,7 +60,7 @@ public class QNewsController {
 
     @RequestMapping("update")
     @ResponseBody
-    public Wrapper update(@RequestBody QNews qNews, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper update(QNews qNews, @RequestParam("imgFile") MultipartFile file) {
         if (StringUtils.isNotBlank(file.getOriginalFilename())) {
             qNews.setCoverimg(null);
             if (qNews.getCoverimg() != null) {

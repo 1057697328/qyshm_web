@@ -36,7 +36,7 @@ public class QProductController {
 
     @RequestMapping("insert")
     @ResponseBody
-    public Wrapper insert(@RequestBody QProduct qProduct, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper insert(QProduct qProduct, @RequestParam("imgFile") MultipartFile file) {
         if (StringUtils.isNotBlank(file.getOriginalFilename())) {
             qProduct.setQcoverimg(null);
             if (qProduct.getQcoverimg() != null) {
@@ -54,7 +54,7 @@ public class QProductController {
 
     @RequestMapping("update")
     @ResponseBody
-    public Wrapper update(@RequestBody QProduct qProduct, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper update(QProduct qProduct, @RequestParam("imgFile") MultipartFile file) {
         if (StringUtils.isNotBlank(file.getOriginalFilename())) {
             qProduct.setQcoverimg(null);
             if (qProduct.getQcoverimg() != null) {
