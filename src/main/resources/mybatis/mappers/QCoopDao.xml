@@ -8,11 +8,21 @@
         <result column="engname" jdbcType="VARCHAR" property="engname"/>
         <result column="coverimg" jdbcType="VARCHAR" property="coverimg"/>
         <result column="href" jdbcType="VARCHAR" property="href"/>
+        <association property="qCoopType" column="ctypeid" select="queryCoopType"></association>
+    </resultMap>
+    <resultMap id="QCoopTypeMap" type="net.lightwing.qyshm_web.pojo.QCooptype">
+        <id column="ctypeid" jdbcType="INTEGER" property="ctypeid"/>
+        <result column="ctypename" jdbcType="VARCHAR" property="ctypename"/>
+        <result column="showdetail" jdbcType="INTEGER" property="showdetail"/>
     </resultMap>
     <sql id="Base_Column_List">
     cid, ctypeid, cname, engname, coverimg, href
   </sql>
     <select id="selectPage" resultType="java.util.Map" resultMap="BaseResultMap">
-        select * from q_coop
+        select <include refid="Base_Column_List"></include> from q_coop
+    </select>
+
+    <select id="queryCoopType" resultMap="QCoopTypeMap">
+        select * from q_cooptype where ctypeid=#{ctypeid}
     </select>
 </mapper>

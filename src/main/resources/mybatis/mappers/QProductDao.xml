@@ -16,7 +16,7 @@
   </sql>
     <select id="selectPage" resultType="java.util.Map" resultMap="ResultMapWithBLOBs">
         select
-        <include refid="Base_Column_List"></include>
+        <include refid="Base_Column_List"></include>,
         <include refid="Blob_Column_List"></include>
         from q_product
     </select>

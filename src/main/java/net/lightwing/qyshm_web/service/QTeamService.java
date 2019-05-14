@@ -18,7 +18,7 @@ public class QTeamService {
     private QTeamDao qTeamDao;
 
     public PageInfo selectPageInfo(PageInfo pageInfo) {
-        pageInfo.setSort("qid");
+        pageInfo.setSort("tid");
         Page<Map<String, Object>> page = new Page<>(pageInfo.getNowpage(), pageInfo.getPagesize());
         page.setOrderByField(pageInfo.getSort());//排序字段
         pageInfo.setOrder("asc");//排序方式

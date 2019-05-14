@@ -7,15 +7,25 @@
         <result column="theadimg" jdbcType="VARCHAR" property="theadimg"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
+        <association property="qTeamtype" column="ttypeid" select="queryTeamType"></association>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.lightwing.qyshm_web.pojo.QTeam">
         <result column="tdetail" jdbcType="LONGVARCHAR" property="tdetail"/>
     </resultMap>
+
+    <resultMap id="QTeamTypeMap" type="net.lightwing.qyshm_web.pojo.QTeamtype">
+        <id column="ttypeid" property="ttypeid"/>
+        <result column="ttypename" property="ttypename"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
     tid, ttypeid, theadimg, `name`, `status`,tdetail
   </sql>
 
     <select id="selectPage" resultType="java.util.Map" resultMap="ResultMapWithBLOBs">
         select <include refid="Base_Column_List"></include> from q_team
+    </select>
+    <select id="queryTeamType" resultMap="QTeamTypeMap">
+        select * from q_teamtype where ttypeid=#{ttypeid}
     </select>
 </mapper>

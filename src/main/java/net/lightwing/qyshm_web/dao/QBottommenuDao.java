@@ -3,10 +3,11 @@ package net.lightwing.qyshm_web.dao;
 import com.baomidou.mybatisplus.plugins.Page;
 import net.lightwing.qyshm_web.commons.util.BaseMapper;
 import net.lightwing.qyshm_web.pojo.QBottommenu;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
-
+@Mapper
 public interface QBottommenuDao extends BaseMapper<QBottommenu> {
 //    long countByExample(QBottommenuExample example);
 //

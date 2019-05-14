@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("admin/coop")
+@RequestMapping("admin/coopType")
 public class QCoopTypeController {
 
     @Autowired

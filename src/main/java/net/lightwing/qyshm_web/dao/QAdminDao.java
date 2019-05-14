@@ -1,10 +1,13 @@
 package net.lightwing.qyshm_web.dao;
 
 import java.util.List;
+
 import net.lightwing.qyshm_web.pojo.QAdmin;
 import net.lightwing.qyshm_web.pojo.QAdminExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface QAdminDao {
     long countByExample(QAdminExample example);
 

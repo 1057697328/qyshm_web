@@ -7,8 +7,9 @@ import com.baomidou.mybatisplus.plugins.Page;
 import net.lightwing.qyshm_web.commons.util.BaseMapper;
 import net.lightwing.qyshm_web.pojo.QTeam;
 import net.lightwing.qyshm_web.pojo.QTeamExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
+@Mapper
 public interface QTeamDao extends BaseMapper<QTeam> {
     /**
      * 前台分页
