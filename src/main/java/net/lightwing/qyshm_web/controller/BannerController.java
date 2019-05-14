@@ -1,7 +1,6 @@
 package net.lightwing.qyshm_web.controller;
 
 import net.lightwing.qyshm_web.commons.util.PageInfo;
-import net.lightwing.qyshm_web.commons.wrapper.WrapMapper;
 import net.lightwing.qyshm_web.service.QBannerService;
 import net.lightwing.qyshm_web.service.QBottommenuService;
 import net.lightwing.qyshm_web.service.QConfigService;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.Map;

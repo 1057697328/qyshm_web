@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
+
+import java.util.List;
 
 /**
  * @author : clarence
@@ -15,14 +18,17 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @SuppressWarnings("ALL")
 @Service
-@Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
-public class QAdminService
-{
+@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+public class QAdminService {
     @Autowired
     private QAdminDao dao;
 
-    public void addAdmin(QAdmin admin)
-    {
+    public void addAdmin(QAdmin admin) {
         dao.insert(admin);
     }
+
+    public QAdmin selectByName(String name) {
+        return dao.selectByName(name);
+    }
+
 }
