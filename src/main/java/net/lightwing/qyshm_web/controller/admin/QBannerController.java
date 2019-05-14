@@ -36,7 +36,7 @@ public class QBannerController {
 
     @RequestMapping("insert")
     @ResponseBody
-    public Wrapper insert(@RequestBody QBanner qBanner, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper insert(QBanner qBanner, @RequestParam("imgFile") MultipartFile file) {
         if (StringUtils.isNotBlank(file.getOriginalFilename())) {
             qBanner.setImgpath(null);
             if (qBanner.getImgpath() != null) {
@@ -54,7 +54,7 @@ public class QBannerController {
 
     @RequestMapping("update")
     @ResponseBody
-    public Wrapper update(@RequestBody QBanner qBanner, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper update(QBanner qBanner, @RequestParam("imgFile") MultipartFile file) {
 
         if (StringUtils.isNotBlank(file.getOriginalFilename())) {
             qBanner.setImgpath(null);

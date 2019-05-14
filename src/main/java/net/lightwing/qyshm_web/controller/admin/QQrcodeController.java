@@ -36,7 +36,7 @@ public class QQrcodeController {
 
     @RequestMapping("insert")
     @ResponseBody
-    public Wrapper insert(@RequestBody QQrcode qrcode, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper insert(QQrcode qrcode, @RequestParam("imgFile") MultipartFile file) {
         if (StringUtils.isNotBlank(file.getOriginalFilename())) {
             qrcode.setImgpath(null);
             if (qrcode.getImgpath() != null) {
@@ -54,7 +54,7 @@ public class QQrcodeController {
 
     @RequestMapping("update")
     @ResponseBody
-    public Wrapper update(@RequestBody QQrcode qrcode, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper update(QQrcode qrcode, @RequestParam("imgFile") MultipartFile file) {
         if (StringUtils.isNotBlank(file.getOriginalFilename())) {
             qrcode.setImgpath(null);
             if (qrcode.getImgpath() != null) {
