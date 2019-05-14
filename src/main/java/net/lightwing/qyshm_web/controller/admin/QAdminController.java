@@ -1,4 +1,4 @@
-package net.lightwing.qyshm_web.controller;
+package net.lightwing.qyshm_web.controller.admin;
 
 import net.lightwing.qyshm_web.pojo.QAdmin;
 import net.lightwing.qyshm_web.service.QAdminService;

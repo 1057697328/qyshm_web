@@ -1,18 +1,24 @@
 package net.lightwing.qyshm_web.dao;
 
-import java.util.List;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import net.lightwing.qyshm_web.pojo.QBanner;
 import net.lightwing.qyshm_web.pojo.QBannerExample;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-public interface QBannerDao {
+import java.util.List;
+import java.util.Map;
+
+@Mapper
+public interface QBannerDao extends BaseMapper<QBanner> {
     long countByExample(QBannerExample example);
 
     int deleteByExample(QBannerExample example);
 
     int deleteByPrimaryKey(Integer bid);
 
-    int insert(QBanner record);
+    Integer insert(QBanner record);
 
     int insertSelective(QBanner record);
 
@@ -27,4 +33,13 @@ public interface QBannerDao {
     int updateByPrimaryKeySelective(QBanner record);
 
     int updateByPrimaryKey(QBanner record);
+
+    /**
+     * 前台分页
+     *
+     * @param page
+     * @param params
+     * @return
+     */
+    List<Map<String, Object>> selectPage(Page page, Map<String, Object> params);
 }

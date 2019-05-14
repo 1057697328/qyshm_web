@@ -1,30 +1,41 @@
 package net.lightwing.qyshm_web.dao;
 
-import java.util.List;
+import com.baomidou.mybatisplus.plugins.Page;
+import net.lightwing.qyshm_web.commons.util.BaseMapper;
 import net.lightwing.qyshm_web.pojo.QBottommenu;
-import net.lightwing.qyshm_web.pojo.QBottommenuExample;
-import org.apache.ibatis.annotations.Param;
 
-public interface QBottommenuDao {
-    long countByExample(QBottommenuExample example);
+import java.util.List;
+import java.util.Map;
 
-    int deleteByExample(QBottommenuExample example);
+public interface QBottommenuDao extends BaseMapper<QBottommenu> {
+//    long countByExample(QBottommenuExample example);
+//
+//    int deleteByExample(QBottommenuExample example);
+//
+//    int deleteByPrimaryKey(Integer bmid);
+//
+//    int insert(QBottommenu record);
+//
+//    int insertSelective(QBottommenu record);
 
-    int deleteByPrimaryKey(Integer bmid);
+//    List<QBottommenu> selectByExample(QBottommenuExample example);
 
-    int insert(QBottommenu record);
+//    QBottommenu selectByPrimaryKey(Integer bmid);
+//
+//    int updateByExampleSelective(@Param("record") QBottommenu record, @Param("example") QBottommenuExample example);
+//
+//    int updateByExample(@Param("record") QBottommenu record, @Param("example") QBottommenuExample example);
+//
+//    int updateByPrimaryKeySelective(QBottommenu record);
+//
+//    int updateByPrimaryKey(QBottommenu record);
 
-    int insertSelective(QBottommenu record);
-
-    List<QBottommenu> selectByExample(QBottommenuExample example);
-
-    QBottommenu selectByPrimaryKey(Integer bmid);
-
-    int updateByExampleSelective(@Param("record") QBottommenu record, @Param("example") QBottommenuExample example);
-
-    int updateByExample(@Param("record") QBottommenu record, @Param("example") QBottommenuExample example);
-
-    int updateByPrimaryKeySelective(QBottommenu record);
-
-    int updateByPrimaryKey(QBottommenu record);
+    /**
+     * 前台分页
+     *
+     * @param page
+     * @param params
+     * @return
+     */
+    List<Map<String, Object>> selectPage(Page page, Map<String, Object> params);
 }
