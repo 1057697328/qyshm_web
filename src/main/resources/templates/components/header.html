@@ -1,0 +1,12 @@
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title th:text="'起源生命科技(深圳)有限公司 - '+${title}"></title>
+
+    <link rel="stylesheet" th:href="@{~/css/bulma.min.css}">
+    <link rel="stylesheet" th:href="@{~/css/swiper.min.css}">
+
+</head>
+</html>
