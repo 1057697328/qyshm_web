@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.lightwing.qyshm_web.dao.QNewsDao">
+    <resultMap id="BaseResultMap" type="net.lightwing.qyshm_web.pojo.QNews">
+        <id column="nid" property="nid"/>
+        <result column="ntitle" property="ntitle"/>
+        <result column="coverimg" property="coverimg"/>
+        <result column="ndetail" property="ndetail"/>
+        <result column="createtime" property="createtime"/>
+        <result column="author" property="author"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    nid, ntitle, coverimg, ndetail, createtime, author
+  </sql>
+    <select id="selectPage" resultType="java.util.Map" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from q_news
+    </select>
+</mapper>

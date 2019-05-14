@@ -1,36 +1,21 @@
 package net.lightwing.qyshm_web.dao;
 
 import java.util.List;
+import java.util.Map;
+
+import com.baomidou.mybatisplus.plugins.Page;
+import net.lightwing.qyshm_web.commons.util.BaseMapper;
 import net.lightwing.qyshm_web.pojo.QTeam;
 import net.lightwing.qyshm_web.pojo.QTeamExample;
 import org.apache.ibatis.annotations.Param;
 
-public interface QTeamDao {
-    long countByExample(QTeamExample example);
-
-    int deleteByExample(QTeamExample example);
-
-    int deleteByPrimaryKey(Integer tid);
-
-    int insert(QTeam record);
-
-    int insertSelective(QTeam record);
-
-    List<QTeam> selectByExampleWithBLOBs(QTeamExample example);
-
-    List<QTeam> selectByExample(QTeamExample example);
-
-    QTeam selectByPrimaryKey(Integer tid);
-
-    int updateByExampleSelective(@Param("record") QTeam record, @Param("example") QTeamExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") QTeam record, @Param("example") QTeamExample example);
-
-    int updateByExample(@Param("record") QTeam record, @Param("example") QTeamExample example);
-
-    int updateByPrimaryKeySelective(QTeam record);
-
-    int updateByPrimaryKeyWithBLOBs(QTeam record);
-
-    int updateByPrimaryKey(QTeam record);
+public interface QTeamDao extends BaseMapper<QTeam> {
+    /**
+     * 前台分页
+     *
+     * @param page
+     * @param params
+     * @return
+     */
+    List<Map<String, Object>> selectPage(Page page, Map<String, Object> params);
 }

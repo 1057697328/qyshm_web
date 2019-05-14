@@ -2,9 +2,8 @@ package net.lightwing.qyshm_web.service;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import net.lightwing.qyshm_web.commons.util.PageInfo;
-import net.lightwing.qyshm_web.dao.QConfigDao;
-import net.lightwing.qyshm_web.pojo.QBottommenu;
-import net.lightwing.qyshm_web.pojo.QConfig;
+import net.lightwing.qyshm_web.dao.QCooptypeDao;
+import net.lightwing.qyshm_web.pojo.QCooptype;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -14,43 +13,43 @@ import java.util.Map;
 
 @SuppressWarnings("ALL")
 @Service
-public class QConfigService {
+public class QCooptypeService {
 
     @Autowired
-    private QConfigDao qConfigDao;
+    private QCooptypeDao qCooptypeDao;
 
     public PageInfo selectPageInfo(PageInfo pageInfo) {
-        pageInfo.setSort("cid");
+        pageInfo.setSort("ctypeid");
         Page<Map<String, Object>> page = new Page<>(pageInfo.getNowpage(), pageInfo.getPagesize());
         page.setOrderByField(pageInfo.getSort());//排序字段
         pageInfo.setOrder("asc");//排序方式
         page.setAsc(pageInfo.getOrder().equalsIgnoreCase("desc"));
-        pageInfo.setRows(qConfigDao.selectPage(page, pageInfo.getCondition()));//获取数据
+        pageInfo.setRows(qCooptypeDao.selectPage(page, pageInfo.getCondition()));//获取数据
         pageInfo.setTotal(page.getTotal());//获取总条数
         return pageInfo;
     }
 
-    public int insert(QConfig qConfig) {
-        return qConfigDao.insertSelective(qConfig);
+    public int insert(QCooptype qCooptype) {
+        return qCooptypeDao.insertSelective(qCooptype);
     }
 
-    public int update(QConfig qConfig) {
-        return qConfigDao.updateByPrimaryKeySelective(qConfig);
+    public int update(QCooptype qCooptype) {
+        return qCooptypeDao.updateByPrimaryKeySelective(qCooptype);
     }
 
     public int delete(Integer cid) {
-        return qConfigDao.deleteByPrimaryKey(cid);
+        return qCooptypeDao.deleteByPrimaryKey(cid);
     }
 
-    public List<QConfig> selectByName(String name) {
-        Example example = new Example(QConfig.class);
+    public List<QCooptype> selectByName(String name) {
+        Example example = new Example(QCooptype.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("address", name);
-        return qConfigDao.selectByExample(example);
+        criteria.andEqualTo("ctypename", name);
+        return qCooptypeDao.selectByExample(example);
     }
 
-    public QConfig selectById(Integer cid) {
-        return qConfigDao.selectByPrimaryKey(cid);
+    public QCooptype selectById(Integer cid) {
+        return qCooptypeDao.selectByPrimaryKey(cid);
     }
 
 }

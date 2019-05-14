@@ -1,30 +1,20 @@
 package net.lightwing.qyshm_web.dao;
 
-import java.util.List;
+import com.baomidou.mybatisplus.plugins.Page;
+import net.lightwing.qyshm_web.commons.util.BaseMapper;
 import net.lightwing.qyshm_web.pojo.QCooptype;
-import net.lightwing.qyshm_web.pojo.QCooptypeExample;
-import org.apache.ibatis.annotations.Param;
 
-public interface QCooptypeDao {
-    long countByExample(QCooptypeExample example);
+import java.util.List;
+import java.util.Map;
 
-    int deleteByExample(QCooptypeExample example);
+public interface QCooptypeDao extends BaseMapper<QCooptype> {
 
-    int deleteByPrimaryKey(Integer ctypeid);
-
-    int insert(QCooptype record);
-
-    int insertSelective(QCooptype record);
-
-    List<QCooptype> selectByExample(QCooptypeExample example);
-
-    QCooptype selectByPrimaryKey(Integer ctypeid);
-
-    int updateByExampleSelective(@Param("record") QCooptype record, @Param("example") QCooptypeExample example);
-
-    int updateByExample(@Param("record") QCooptype record, @Param("example") QCooptypeExample example);
-
-    int updateByPrimaryKeySelective(QCooptype record);
-
-    int updateByPrimaryKey(QCooptype record);
+    /**
+     * 前台分页
+     *
+     * @param page
+     * @param params
+     * @return
+     */
+    List<Map<String, Object>> selectPage(Page page, Map<String, Object> params);
 }

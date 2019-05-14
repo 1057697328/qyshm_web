@@ -4,9 +4,12 @@ import com.baomidou.mybatisplus.plugins.Page;
 import net.lightwing.qyshm_web.commons.util.PageInfo;
 import net.lightwing.qyshm_web.dao.QBannerDao;
 import net.lightwing.qyshm_web.pojo.QBanner;
+import net.lightwing.qyshm_web.pojo.QBottommenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -39,5 +42,11 @@ public class QBannerService {
 
     public QBanner selectById(Integer bid) {
         return qBannerDao.selectByPrimaryKey(bid);
+    }
+    public List<QBanner> selectByName(String name) {
+        Example example = new Example(QBottommenu.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("href", name);
+        return qBannerDao.selectByExample(example);
     }
 }

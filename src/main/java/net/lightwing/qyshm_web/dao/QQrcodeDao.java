@@ -4,34 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import net.lightwing.qyshm_web.commons.util.BaseMapper;
 import net.lightwing.qyshm_web.pojo.QQrcode;
 import net.lightwing.qyshm_web.pojo.QQrcodeExample;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
-public interface QQrcodeDao {
-    long countByExample(QQrcodeExample example);
-
-    int deleteByExample(QQrcodeExample example);
-
-    int deleteByPrimaryKey(Integer qid);
-
-    int insert(QQrcode record);
-
-    int insertSelective(QQrcode record);
-
-    List<QQrcode> selectByExample(QQrcodeExample example);
-
-    QQrcode selectByPrimaryKey(Integer qid);
-
-    int updateByExampleSelective(@Param("record") QQrcode record, @Param("example") QQrcodeExample example);
-
-    int updateByExample(@Param("record") QQrcode record, @Param("example") QQrcodeExample example);
-
-    int updateByPrimaryKeySelective(QQrcode record);
-
-    int updateByPrimaryKey(QQrcode record);
+public interface QQrcodeDao extends BaseMapper<QQrcode> {
 
     /**
      * 前台分页

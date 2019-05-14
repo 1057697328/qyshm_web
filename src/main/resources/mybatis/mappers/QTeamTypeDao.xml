@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.lightwing.qyshm_web.dao.QTeamtypeDao">
+    <resultMap id="BaseResultMap" type="net.lightwing.qyshm_web.pojo.QTeamtype">
+        <id column="ttypeid" property="ttypeid"/>
+        <result column="ttypename" property="ttypename"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ttypeid, ttypename
+  </sql>
+
+    <select id="selectPage" resultType="java.util.Map" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include> from q_teamtype
+    </select>
+</mapper>

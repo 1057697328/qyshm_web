@@ -1,36 +1,21 @@
 package net.lightwing.qyshm_web.dao;
 
 import java.util.List;
+import java.util.Map;
+
+import com.baomidou.mybatisplus.plugins.Page;
+import net.lightwing.qyshm_web.commons.util.BaseMapper;
 import net.lightwing.qyshm_web.pojo.QTechdev;
 import net.lightwing.qyshm_web.pojo.QTechdevExample;
 import org.apache.ibatis.annotations.Param;
 
-public interface QTechdevDao {
-    long countByExample(QTechdevExample example);
-
-    int deleteByExample(QTechdevExample example);
-
-    int deleteByPrimaryKey(Integer tid);
-
-    int insert(QTechdev record);
-
-    int insertSelective(QTechdev record);
-
-    List<QTechdev> selectByExampleWithBLOBs(QTechdevExample example);
-
-    List<QTechdev> selectByExample(QTechdevExample example);
-
-    QTechdev selectByPrimaryKey(Integer tid);
-
-    int updateByExampleSelective(@Param("record") QTechdev record, @Param("example") QTechdevExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") QTechdev record, @Param("example") QTechdevExample example);
-
-    int updateByExample(@Param("record") QTechdev record, @Param("example") QTechdevExample example);
-
-    int updateByPrimaryKeySelective(QTechdev record);
-
-    int updateByPrimaryKeyWithBLOBs(QTechdev record);
-
-    int updateByPrimaryKey(QTechdev record);
+public interface QTechdevDao extends BaseMapper<QTechdev> {
+    /**
+     * 前台分页
+     *
+     * @param page
+     * @param params
+     * @return
+     */
+    List<Map<String, Object>> selectPage(Page page, Map<String, Object> params);
 }

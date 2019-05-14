@@ -5,7 +5,8 @@ import net.lightwing.qyshm_web.commons.util.UPLOAD;
 import net.lightwing.qyshm_web.commons.wrapper.WrapMapper;
 import net.lightwing.qyshm_web.commons.wrapper.Wrapper;
 import net.lightwing.qyshm_web.pojo.QBanner;
-import net.lightwing.qyshm_web.service.QBannerService;
+import net.lightwing.qyshm_web.pojo.QNews;
+import net.lightwing.qyshm_web.service.QNewsService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,83 +21,87 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("admin/banner")
-public class QBannerController {
+@RequestMapping("admin/news")
+public class QNewsController {
+
     @Autowired
-    private QBannerService qBannerService;
+    private QNewsService qNewsService;
 
     @RequestMapping("selectAdminPageInfo")
     @ResponseBody
     public Wrapper selectAdminPageInfo(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "15") Integer limit) {
         Map<String, Object> params = new HashMap<>();
         PageInfo pageInfo = new PageInfo(page, limit);
-        pageInfo = qBannerService.selectPageInfo(pageInfo);
+        pageInfo = qNewsService.selectPageInfo(pageInfo);
         return WrapMapper.ok().result(pageInfo);
     }
 
     @RequestMapping("insert")
     @ResponseBody
-    public Wrapper insert(@RequestBody QBanner qBanner, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper insert(@RequestBody QNews qNews, @RequestParam("imgFile") MultipartFile file) {
+        List<QNews> qCoopTypeList = qNewsService.selectByName(qNews.getNtitle());
+        if (qCoopTypeList.size() > 0) {
+            return WrapMapper.ok().message("该新闻标题已存在");
+        }
         if (StringUtils.isNotBlank(file.getOriginalFilename())) {
-            qBanner.setImgpath(null);
-            if (qBanner.getImgpath() != null) {
-                String deletepath = qBanner.getImgpath().substring(1, qBanner.getImgpath().length());
+            qNews.setCoverimg(null);
+            if (qNews.getCoverimg() != null) {
+                String deletepath = qNews.getCoverimg().substring(1, qNews.getCoverimg().length());
                 UPLOAD.deleteFile(deletepath);
             }
             Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
             if ((int) upload.get("code") == 200) {
-                qBanner.setImgpath("/pictures/" + upload.get("filename"));
+                qNews.setCoverimg("/pictures/" + upload.get("filename"));
             }
         }
-        qBannerService.insert(qBanner);
+        qNewsService.insert(qNews);
         return WrapMapper.ok().message("新增成功");
     }
 
     @RequestMapping("update")
     @ResponseBody
-    public Wrapper update(@RequestBody QBanner qBanner, @RequestParam("imgFile") MultipartFile file) {
-
+    public Wrapper update(@RequestBody QNews qNews, @RequestParam("imgFile") MultipartFile file) {
         if (StringUtils.isNotBlank(file.getOriginalFilename())) {
-            qBanner.setImgpath(null);
-            if (qBanner.getImgpath() != null) {
-                String deletepath = qBanner.getImgpath().substring(1, qBanner.getImgpath().length());
+            qNews.setCoverimg(null);
+            if (qNews.getCoverimg() != null) {
+                String deletepath = qNews.getCoverimg().substring(1, qNews.getCoverimg().length());
                 UPLOAD.deleteFile(deletepath);
             }
             Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
             if ((int) upload.get("code") == 200) {
-                qBanner.setImgpath("/pictures/" + upload.get("filename"));
-                QBanner result = qBannerService.selectById(qBanner.getBid());
-                if (result.getImgpath() != null) {
-                    UPLOAD.deleteFile(result.getImgpath());
+                qNews.setCoverimg("/pictures/" + upload.get("filename"));
+                QNews result = qNewsService.selectById(qNews.getNid());
+                if (result.getCoverimg() != null) {
+                    UPLOAD.deleteFile(result.getCoverimg());
                 }
             }
         }
-        qBannerService.update(qBanner);
+        qNewsService.update(qNews);
         return WrapMapper.ok().message("修改成功");
     }
 
     @RequestMapping("delete")
     @ResponseBody
-    public Wrapper delete(Integer bid) {
-        QBanner qBanner = qBannerService.selectById(bid);
-        if (qBanner.getImgpath() != null) {
-            UPLOAD.deleteFile(qBanner.getImgpath());
+    public Wrapper delete(Integer nid) {
+        QNews result = qNewsService.selectById(nid);
+        if (result.getCoverimg() != null) {
+            UPLOAD.deleteFile(result.getCoverimg());
         }
-        qBannerService.delete(bid);
+        qNewsService.delete(nid);
         return WrapMapper.ok().message("删除成功");
     }
 
     @RequestMapping("selectById")
     @ResponseBody
-    public Wrapper selectById(Integer bid) {
-        QBanner qBanner = qBannerService.selectById(bid);
-        return WrapMapper.ok().result(qBanner);
+    public Wrapper selectById(Integer cid) {
+        QNews qNews = qNewsService.selectById(cid);
+        return WrapMapper.ok().result(qNews);
     }
 
     @RequestMapping("selectByName")
     @ResponseBody
-    public Wrapper selectByName(String name) {
-        List<QBanner> qBanner = qBannerService.selectByName(name);
-        return WrapMapper.ok().result(qBanner);
+    public Wrapper selectById(String name) {
+        List<QNews> qNewsList = qNewsService.selectByName(name);
+        return WrapMapper.ok().result(qNewsList);
     }
 }

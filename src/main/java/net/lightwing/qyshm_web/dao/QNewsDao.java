@@ -1,36 +1,21 @@
 package net.lightwing.qyshm_web.dao;
 
-import java.util.List;
+import com.baomidou.mybatisplus.plugins.Page;
+import net.lightwing.qyshm_web.commons.util.BaseMapper;
 import net.lightwing.qyshm_web.pojo.QNews;
-import net.lightwing.qyshm_web.pojo.QNewsExample;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
 
-public interface QNewsDao {
-    long countByExample(QNewsExample example);
+import java.util.List;
+import java.util.Map;
 
-    int deleteByExample(QNewsExample example);
-
-    int deleteByPrimaryKey(Integer nid);
-
-    int insert(QNews record);
-
-    int insertSelective(QNews record);
-
-    List<QNews> selectByExampleWithBLOBs(QNewsExample example);
-
-    List<QNews> selectByExample(QNewsExample example);
-
-    QNews selectByPrimaryKey(Integer nid);
-
-    int updateByExampleSelective(@Param("record") QNews record, @Param("example") QNewsExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") QNews record, @Param("example") QNewsExample example);
-
-    int updateByExample(@Param("record") QNews record, @Param("example") QNewsExample example);
-
-    int updateByPrimaryKeySelective(QNews record);
-
-    int updateByPrimaryKeyWithBLOBs(QNews record);
-
-    int updateByPrimaryKey(QNews record);
+@Mapper
+public interface QNewsDao extends BaseMapper<QNews> {
+    /**
+     * 前台分页
+     *
+     * @param page
+     * @param params
+     * @return
+     */
+    List<Map<String, Object>> selectPage(Page page, Map<String, Object> params);
 }

@@ -2,26 +2,26 @@ package net.lightwing.qyshm_web.controller;
 
 import net.lightwing.qyshm_web.commons.util.PageInfo;
 import net.lightwing.qyshm_web.commons.wrapper.WrapMapper;
-import net.lightwing.qyshm_web.service.QBannerService;
+import net.lightwing.qyshm_web.commons.wrapper.Wrapper;
+import net.lightwing.qyshm_web.pojo.QConfig;
 import net.lightwing.qyshm_web.service.QBottommenuService;
 import net.lightwing.qyshm_web.service.QConfigService;
 import net.lightwing.qyshm_web.service.QQrcodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("banner")
-public class BannerController {
-    @Autowired
-    private QBannerService qBannerService;
-
+@RequestMapping("config")
+public class ConfigController {
     @Autowired
     private QBottommenuService qBottommenuService;
 
@@ -31,11 +31,11 @@ public class BannerController {
     @Autowired
     private QQrcodeService qQrcodeService;
 
-    @RequestMapping("selectWebPage")
-    public String selectWebPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "6") Integer limit, Model model) {
+    @RequestMapping("selectWebPageInfo")
+    public String selectWebPageInfo(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "1") Integer limit, Model model) {
         Map<String, Object> params = new HashMap<>();
         PageInfo pageInfo = new PageInfo(page, limit);
-        pageInfo = qBannerService.selectPageInfo(pageInfo);
+        pageInfo = qConfigService.selectPageInfo(pageInfo);
         PageInfo qb = new PageInfo(1, 9);
         qb = qBottommenuService.selectPageInfo(qb);
         PageInfo qc = new PageInfo(1, 1);
@@ -48,4 +48,5 @@ public class BannerController {
         model.addAttribute("qq", qq);
         return "";
     }
+
 }

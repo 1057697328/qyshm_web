@@ -1,37 +1,15 @@
 package net.lightwing.qyshm_web.dao;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import net.lightwing.qyshm_web.commons.util.BaseMapper;
+import net.lightwing.qyshm_web.pojo.QConfig;
+import org.apache.ibatis.annotations.Mapper;
+
 import java.util.List;
 import java.util.Map;
 
-import com.baomidou.mybatisplus.plugins.Page;
-import net.lightwing.qyshm_web.pojo.QConfig;
-import net.lightwing.qyshm_web.pojo.QConfigExample;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
 @Mapper
-public interface QConfigDao {
-    long countByExample(QConfigExample example);
-
-    int deleteByExample(QConfigExample example);
-
-    int deleteByPrimaryKey(Integer cid);
-
-    int insert(QConfig record);
-
-    int insertSelective(QConfig record);
-
-    List<QConfig> selectByExample(QConfigExample example);
-
-    QConfig selectByPrimaryKey(Integer cid);
-
-    int updateByExampleSelective(@Param("record") QConfig record, @Param("example") QConfigExample example);
-
-    int updateByExample(@Param("record") QConfig record, @Param("example") QConfigExample example);
-
-    int updateByPrimaryKeySelective(QConfig record);
-
-    int updateByPrimaryKey(QConfig record);
+public interface QConfigDao extends BaseMapper<QConfig> {
 
     /**
      * 前台分页

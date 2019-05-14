@@ -4,8 +4,8 @@ import net.lightwing.qyshm_web.commons.util.PageInfo;
 import net.lightwing.qyshm_web.commons.util.UPLOAD;
 import net.lightwing.qyshm_web.commons.wrapper.WrapMapper;
 import net.lightwing.qyshm_web.commons.wrapper.Wrapper;
-import net.lightwing.qyshm_web.pojo.QBanner;
-import net.lightwing.qyshm_web.service.QBannerService;
+import net.lightwing.qyshm_web.pojo.QQrcode;
+import net.lightwing.qyshm_web.service.QQrcodeService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,87 +16,80 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("admin/banner")
-public class QBannerController {
+@RequestMapping("admin/qrcode")
+public class QQrcodeController {
+
     @Autowired
-    private QBannerService qBannerService;
+    private QQrcodeService qQrcodeService;
 
     @RequestMapping("selectAdminPageInfo")
     @ResponseBody
     public Wrapper selectAdminPageInfo(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "15") Integer limit) {
         Map<String, Object> params = new HashMap<>();
         PageInfo pageInfo = new PageInfo(page, limit);
-        pageInfo = qBannerService.selectPageInfo(pageInfo);
+        pageInfo = qQrcodeService.selectPageInfo(pageInfo);
         return WrapMapper.ok().result(pageInfo);
     }
 
     @RequestMapping("insert")
     @ResponseBody
-    public Wrapper insert(@RequestBody QBanner qBanner, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper insert(@RequestBody QQrcode qrcode, @RequestParam("imgFile") MultipartFile file) {
         if (StringUtils.isNotBlank(file.getOriginalFilename())) {
-            qBanner.setImgpath(null);
-            if (qBanner.getImgpath() != null) {
-                String deletepath = qBanner.getImgpath().substring(1, qBanner.getImgpath().length());
+            qrcode.setImgpath(null);
+            if (qrcode.getImgpath() != null) {
+                String deletepath = qrcode.getImgpath().substring(1, qrcode.getImgpath().length());
                 UPLOAD.deleteFile(deletepath);
             }
             Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
             if ((int) upload.get("code") == 200) {
-                qBanner.setImgpath("/pictures/" + upload.get("filename"));
+                qrcode.setImgpath("/pictures/" + upload.get("filename"));
             }
         }
-        qBannerService.insert(qBanner);
+        qQrcodeService.insert(qrcode);
         return WrapMapper.ok().message("新增成功");
     }
 
     @RequestMapping("update")
     @ResponseBody
-    public Wrapper update(@RequestBody QBanner qBanner, @RequestParam("imgFile") MultipartFile file) {
-
+    public Wrapper update(@RequestBody QQrcode qrcode, @RequestParam("imgFile") MultipartFile file) {
         if (StringUtils.isNotBlank(file.getOriginalFilename())) {
-            qBanner.setImgpath(null);
-            if (qBanner.getImgpath() != null) {
-                String deletepath = qBanner.getImgpath().substring(1, qBanner.getImgpath().length());
+            qrcode.setImgpath(null);
+            if (qrcode.getImgpath() != null) {
+                String deletepath = qrcode.getImgpath().substring(1, qrcode.getImgpath().length());
                 UPLOAD.deleteFile(deletepath);
             }
             Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
             if ((int) upload.get("code") == 200) {
-                qBanner.setImgpath("/pictures/" + upload.get("filename"));
-                QBanner result = qBannerService.selectById(qBanner.getBid());
+                qrcode.setImgpath("/pictures/" + upload.get("filename"));
+                QQrcode result = qQrcodeService.selectById(qrcode.getQid());
                 if (result.getImgpath() != null) {
                     UPLOAD.deleteFile(result.getImgpath());
                 }
             }
         }
-        qBannerService.update(qBanner);
+        qQrcodeService.update(qrcode);
         return WrapMapper.ok().message("修改成功");
     }
 
     @RequestMapping("delete")
     @ResponseBody
-    public Wrapper delete(Integer bid) {
-        QBanner qBanner = qBannerService.selectById(bid);
-        if (qBanner.getImgpath() != null) {
-            UPLOAD.deleteFile(qBanner.getImgpath());
+    public Wrapper delete(Integer nid) {
+        QQrcode result = qQrcodeService.selectById(nid);
+        if (result.getImgpath() != null) {
+            UPLOAD.deleteFile(result.getImgpath());
         }
-        qBannerService.delete(bid);
+        qQrcodeService.delete(nid);
         return WrapMapper.ok().message("删除成功");
     }
 
     @RequestMapping("selectById")
     @ResponseBody
-    public Wrapper selectById(Integer bid) {
-        QBanner qBanner = qBannerService.selectById(bid);
-        return WrapMapper.ok().result(qBanner);
+    public Wrapper selectById(Integer cid) {
+        QQrcode qrcode = qQrcodeService.selectById(cid);
+        return WrapMapper.ok().result(qrcode);
     }
 
-    @RequestMapping("selectByName")
-    @ResponseBody
-    public Wrapper selectByName(String name) {
-        List<QBanner> qBanner = qBannerService.selectByName(name);
-        return WrapMapper.ok().result(qBanner);
-    }
 }

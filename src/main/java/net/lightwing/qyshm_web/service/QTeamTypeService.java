@@ -2,9 +2,9 @@ package net.lightwing.qyshm_web.service;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import net.lightwing.qyshm_web.commons.util.PageInfo;
-import net.lightwing.qyshm_web.dao.QConfigDao;
-import net.lightwing.qyshm_web.pojo.QBottommenu;
-import net.lightwing.qyshm_web.pojo.QConfig;
+import net.lightwing.qyshm_web.dao.QTeamtypeDao;
+import net.lightwing.qyshm_web.pojo.QTeam;
+import net.lightwing.qyshm_web.pojo.QTeamtype;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -12,45 +12,45 @@ import tk.mybatis.mapper.entity.Example;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("ALL")
 @Service
-public class QConfigService {
+public class QTeamTypeService {
 
     @Autowired
-    private QConfigDao qConfigDao;
+    private QTeamtypeDao qTeamtypeDao;
 
     public PageInfo selectPageInfo(PageInfo pageInfo) {
-        pageInfo.setSort("cid");
+        pageInfo.setSort("ttypeid");
         Page<Map<String, Object>> page = new Page<>(pageInfo.getNowpage(), pageInfo.getPagesize());
         page.setOrderByField(pageInfo.getSort());//排序字段
         pageInfo.setOrder("asc");//排序方式
         page.setAsc(pageInfo.getOrder().equalsIgnoreCase("desc"));
-        pageInfo.setRows(qConfigDao.selectPage(page, pageInfo.getCondition()));//获取数据
+        pageInfo.setRows(qTeamtypeDao.selectPage(page, pageInfo.getCondition()));//获取数据
         pageInfo.setTotal(page.getTotal());//获取总条数
         return pageInfo;
     }
 
-    public int insert(QConfig qConfig) {
-        return qConfigDao.insertSelective(qConfig);
+    public int insert(QTeamtype qTeamtype) {
+        return qTeamtypeDao.insertSelective(qTeamtype);
     }
 
-    public int update(QConfig qConfig) {
-        return qConfigDao.updateByPrimaryKeySelective(qConfig);
+    public int update(QTeamtype qTeamtype) {
+        return qTeamtypeDao.updateByPrimaryKeySelective(qTeamtype);
     }
 
     public int delete(Integer cid) {
-        return qConfigDao.deleteByPrimaryKey(cid);
+        return qTeamtypeDao.deleteByPrimaryKey(cid);
     }
 
-    public List<QConfig> selectByName(String name) {
-        Example example = new Example(QConfig.class);
+    public List<QTeamtype> selectByName(String name) {
+        Example example = new Example(QTeam.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("address", name);
-        return qConfigDao.selectByExample(example);
+        criteria.andEqualTo("ttypename", name);
+        return qTeamtypeDao.selectByExample(example);
     }
 
-    public QConfig selectById(Integer cid) {
-        return qConfigDao.selectByPrimaryKey(cid);
+    public QTeamtype selectById(Integer cid) {
+        return qTeamtypeDao.selectByPrimaryKey(cid);
     }
+
 
 }

@@ -46,7 +46,7 @@ public class QBottommenuService {
         return qBottommenuDao.selectByPrimaryKey(bmid);
     }
 
-    public List<QBottommenu> selectByName(String name){
+    public List<QBottommenu> selectByName(String name) {
         Example example = new Example(QBottommenu.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("bmtitle", name);
