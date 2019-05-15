@@ -1,0 +1,49 @@
+@media all and (min-width: 769px)
+{
+    .qCode
+    {
+        margin-right:1rem;
+    }
+}
+
+@media all and (max-width: 320px)
+{
+    .qCode
+    {
+        width:1rem;
+        height:1rem;
+    }
+}
+
+.bottom{
+    clear: both;
+}
+.foot{
+float: left;
+}
+.footCode{
+    float: left;
+}
+.foot_ul{
+    float: left;
+    width: 30%;
+}
+.foot_li{
+    margin-bottom: 8%;
+}
+.foot_li a{
+    font-size: 12px;
+}
+.qCode{
+    width: 6rem;
+    height: 6rem;
+}
+
+
+
+
+body{
+    overflow: hidden;
+    height:auto;
+    min-height: auto;
+}

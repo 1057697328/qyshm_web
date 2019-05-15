@@ -2,11 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="header(title)">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <title th:text="'起源生命科技(深圳)有限公司 - '+${title}"></title>
 
     <link rel="stylesheet" th:href="@{~/css/bulma.min.css}">
     <link rel="stylesheet" th:href="@{~/css/swiper.min.css}">
-
+    <link th:href="@{~/css/highlight.css}" rel="stylesheet"/>
+    <link th:href="@{~/css/documentation.min.css}" rel="stylesheet">
+    <link th:href="@{~/css/bulma-carousel.min.css}" rel="stylesheet">
+    <link th:href="@{~/css/style.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 </head>
 </html>
