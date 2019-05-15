@@ -3,6 +3,7 @@ package net.lightwing.qyshm_web.controller;
 import net.lightwing.qyshm_web.commons.util.PageInfo;
 import net.lightwing.qyshm_web.service.QBottommenuService;
 import net.lightwing.qyshm_web.service.QConfigService;
+import net.lightwing.qyshm_web.service.QCooptypeService;
 import net.lightwing.qyshm_web.service.QQrcodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("config")
-public class ConfigController {
+@RequestMapping("coopType")
+public class CoopTypeController {
+
+    @Autowired
+    private QCooptypeService qCooptypeService;
+
     @Autowired
     private QBottommenuService qBottommenuService;
 
@@ -26,10 +31,10 @@ public class ConfigController {
     private QQrcodeService qQrcodeService;
 
     @RequestMapping("selectWebPageInfo")
-    public String selectWebPageInfo(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "1") Integer limit, Model model) {
+    public String selectWebPageInfo(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "8") Integer limit, Model model) {
         Map<String, Object> params = new HashMap<>();
         PageInfo pageInfo = new PageInfo(page, limit);
-        pageInfo = qConfigService.selectPageInfo(pageInfo);
+        pageInfo = qCooptypeService.selectPageInfo(pageInfo);
         PageInfo qb = new PageInfo(1, 9);
         qb = qBottommenuService.selectPageInfo(qb);
         PageInfo qc = new PageInfo(1, 1);

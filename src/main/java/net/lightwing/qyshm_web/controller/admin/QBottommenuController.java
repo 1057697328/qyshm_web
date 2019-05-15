@@ -1,20 +1,16 @@
 package net.lightwing.qyshm_web.controller.admin;
 
 import net.lightwing.qyshm_web.commons.util.PageInfo;
-import net.lightwing.qyshm_web.commons.util.UPLOAD;
 import net.lightwing.qyshm_web.commons.wrapper.WrapMapper;
 import net.lightwing.qyshm_web.commons.wrapper.Wrapper;
-import net.lightwing.qyshm_web.pojo.QBanner;
 import net.lightwing.qyshm_web.pojo.QBottommenu;
 import net.lightwing.qyshm_web.service.QBottommenuService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;

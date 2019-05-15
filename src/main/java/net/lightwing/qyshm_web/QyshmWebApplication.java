@@ -1,31 +1,15 @@
 package net.lightwing.qyshm_web;
 
-import net.lightwing.qyshm_web.commons.util.Constant;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
 @MapperScan("net.lightwing.qyshm_web.dao")
-public class QyshmWebApplication implements WebMvcConfigurer {
-
+public class QyshmWebApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(QyshmWebApplication.class, args);
     }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("*").allowCredentials(true).allowedMethods( "GET", "POST", "PUT", "DELETE" )
-                .maxAge(3600);
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/pictures/**").addResourceLocations("file:"+ Constant.UPLOADPATH);
-    }
 }
