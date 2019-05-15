@@ -20,16 +20,5 @@ public class WebMvcConfg implements WebMvcConfigurer {
         WebMvcConfigurer.super.addInterceptors(registry);
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/pictures/**").addResourceLocations("file:"+ Constant.UPLOADPATH);
-    }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH")
-                .allowCredentials(true).maxAge(3600);
-    }
 }

@@ -21,6 +21,11 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         System.out.println("----------------------进来了-----------------");
+        String origin = request.getHeader("Origin");
+        response.setHeader("Access-Control-Allow-Origin", origin);
+        response.setHeader("Access-Control-Allow-Methods", "*");
+        response.setHeader("Access-Control-Allow-Headers","Origin,Content-Type,Accept,token,X-Requested-With");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
         HttpSession session = request.getSession();
         if (session.getAttribute("user") != null) {
             return true;
