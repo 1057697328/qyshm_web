@@ -27,7 +27,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         } else {
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out = response.getWriter();
-            out.print(JSON.toJSONString(MessageBack.MSG(500,"请重新登录")));
+            out.print(JSON.toJSONString(MessageBack.MSG(501,"请重新登录")));
             out.flush();
             out.close();
             return false;

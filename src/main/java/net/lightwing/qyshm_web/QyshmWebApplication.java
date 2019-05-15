@@ -1,8 +1,8 @@
 package net.lightwing.qyshm_web;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
 @MapperScan("net.lightwing.qyshm_web.dao")
