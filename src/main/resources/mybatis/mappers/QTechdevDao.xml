@@ -15,4 +15,7 @@
         <include refid="Base_Column_List"></include>
         from q_techdev
     </select>
+    <select id="selectByPrimaryKey" resultType="net.lightwing.qyshm_web.pojo.QTechdev">
+        select <include refid="Base_Column_List"></include> from q_techdev where tid=#{cid}
+    </select>
 </mapper>

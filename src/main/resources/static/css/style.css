@@ -1,49 +1,133 @@
-@media all and (min-width: 769px)
-{
-    .qCode
-    {
-        margin-right:1rem;
+@media all and (min-width: 769px) {
+    .qCode {
+        margin-right: 1rem;
     }
 }
 
-@media all and (max-width: 320px)
-{
-    .qCode
-    {
-        width:1rem;
-        height:1rem;
+@media all and (max-width: 320px) {
+    .qCode {
+        width: 1rem;
+        height: 1rem;
     }
 }
 
-.bottom{
+.bottom {
     clear: both;
 }
-.foot{
-float: left;
-}
-.footCode{
+
+.foot {
     float: left;
 }
-.foot_ul{
+
+.footCode {
+    float: left;
+}
+
+.foot_ul {
     float: left;
     width: 30%;
 }
-.foot_li{
+
+.foot_li {
     margin-bottom: 8%;
 }
-.foot_li a{
+
+.foot_li a {
     font-size: 12px;
 }
-.qCode{
+
+.qCode {
     width: 6rem;
     height: 6rem;
 }
 
 
-
-
-body{
+body {
     overflow: hidden;
-    height:auto;
+    height: auto;
     min-height: auto;
+}
+
+html{
+    background-color:#fff;
+}
+.menu_a a {
+    color: #0a0a0a;
+}
+
+.menu_a a:hover {
+    color: red;
+}
+
+#xuxian {
+    margin: 0 auto 2% auto;
+    width: 100%;
+    height: 0;
+    border-bottom: #000000 1px solid; /*#000000表示白色，边框宽度为一个像素，边框线型为虚线*/
+}
+
+.is-128x256
+{
+    width:256px;
+    height:128px;
+}
+
+
+
+
+/*导航栏样式*/
+.navbar .navbar-start .navbar-item
+{
+    height:100%;
+    margin-right:0;
+    /*padding-top:1rem;*/
+    /*padding-bottom:1rem;*/
+    /*width:6rem;*/
+    /*text-align: center;*/
+    padding: 1rem 1.7rem;
+}
+
+.navbar .navbar-menu{
+    margin-left:10rem;
+}
+
+/*菜单内容居中*/
+.navbar .navbar-start
+{
+    text-align:center;
+}
+
+/*去除框架内自带边框圆角*/
+.navbar a.navbar-item{
+    border-radius: 0px;
+}
+
+.navbar a{
+    font-weight:700;
+}
+
+.navbar .navbar-brand
+{
+    padding-top:1rem;
+    padding-bottom:1rem;
+}
+
+/*hover样式*/
+.navbar .navbar-item:hover
+{
+    background: transparent;
+    color:black;
+}
+
+/*hover样式*/
+.is-hoverable
+{
+    cursor:pointer;
+    background: transparent;
+    color:black;
+}
+
+.navbar {
+    /*margin-left:20%;*/
+    background-color:transparent;
 }

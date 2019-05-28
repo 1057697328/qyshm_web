@@ -9,6 +9,7 @@ import net.lightwing.qyshm_web.pojo.QTechdev;
 import net.lightwing.qyshm_web.pojo.QTechdevExample;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
 @Mapper
 public interface QTechdevDao extends BaseMapper<QTechdev> {
     /**
@@ -19,4 +20,6 @@ public interface QTechdevDao extends BaseMapper<QTechdev> {
      * @return
      */
     List<Map<String, Object>> selectPage(Page page, Map<String, Object> params);
+
+    QTechdev selectByPrimaryKey(@Param("cid") Object cid);
 }

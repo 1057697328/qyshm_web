@@ -9,9 +9,10 @@
         <result column="email1" jdbcType="VARCHAR" property="email1"/>
         <result column="email2" jdbcType="VARCHAR" property="email2"/>
         <result column="website" jdbcType="VARCHAR" property="website"/>
+        <result column="about" property="about"></result>
     </resultMap>
     <sql id="Base_Column_List">
-    cid, address, phone1, phone2, email1, email2, website
+    cid, address, phone1, phone2, email1, email2, website,about
   </sql>
     <select id="selectPage" resultType="java.util.Map" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include> from q_config

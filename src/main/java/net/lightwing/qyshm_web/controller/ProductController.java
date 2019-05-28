@@ -2,10 +2,7 @@ package net.lightwing.qyshm_web.controller;
 
 import net.lightwing.qyshm_web.commons.util.PageInfo;
 import net.lightwing.qyshm_web.pojo.QProduct;
-import net.lightwing.qyshm_web.service.QBottommenuService;
-import net.lightwing.qyshm_web.service.QConfigService;
-import net.lightwing.qyshm_web.service.QProductService;
-import net.lightwing.qyshm_web.service.QQrcodeService;
+import net.lightwing.qyshm_web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("product")
 public class ProductController {
 
     @Autowired
@@ -31,8 +27,10 @@ public class ProductController {
     @Autowired
     private QQrcodeService qQrcodeService;
 
+    @Autowired
+    private QTechdevService qTechdevService;
 
-    @RequestMapping("selectWebPageInfo")
+    @RequestMapping("product.html")
     public String selectWebPageInfo(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "15") Integer limit, Model model) {
         Map<String, Object> params = new HashMap<>();
         PageInfo pageInfo = new PageInfo(page, limit);
@@ -43,11 +41,18 @@ public class ProductController {
         qc = qConfigService.selectPageInfo(qc);
         PageInfo qq = new PageInfo(1, 2);
         qq = qQrcodeService.selectPageInfo(qq);
+        PageInfo qt = new PageInfo(1, 100000);
+        qt = qTechdevService.selectPageInfo(qt);
+        model.addAttribute("PageInfo", pageInfo);
+        PageInfo qp = new PageInfo(1, 100000);
+        qp = qProductService.selectPageInfo(qp);
         model.addAttribute("PageInfo", pageInfo);
         model.addAttribute("qb", qb);
         model.addAttribute("qc", qc);
         model.addAttribute("qq", qq);
-        return "";
+        model.addAttribute("qt", qt);
+        model.addAttribute("qp", qp);
+        return "product";
     }
 
     /**
@@ -57,7 +62,7 @@ public class ProductController {
      * @param model
      * @return
      */
-    @RequestMapping("selectById")
+    @RequestMapping("productDetails.html")
     public String selectById(Integer cid, Model model) {
         QProduct qProduct = qProductService.selectById(cid);
         PageInfo qb = new PageInfo(1, 9);
@@ -66,10 +71,16 @@ public class ProductController {
         qc = qConfigService.selectPageInfo(qc);
         PageInfo qq = new PageInfo(1, 2);
         qq = qQrcodeService.selectPageInfo(qq);
-        model.addAttribute("qCoop", qProduct);
+        PageInfo qt = new PageInfo(1, 100000);
+        qt = qTechdevService.selectPageInfo(qt);
+        PageInfo qp = new PageInfo(1, 100000);
+        qp = qProductService.selectPageInfo(qp);
+        model.addAttribute("qProduct", qProduct);
         model.addAttribute("qb", qb);
         model.addAttribute("qc", qc);
         model.addAttribute("qq", qq);
-        return "";
+        model.addAttribute("qt", qt);
+        model.addAttribute("qp", qp);
+        return "productDetails";
     }
 }

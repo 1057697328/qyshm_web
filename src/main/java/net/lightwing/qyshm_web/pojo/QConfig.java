@@ -1,11 +1,14 @@
 package net.lightwing.qyshm_web.pojo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
  * q_config
  * @author 
  */
+@Data
 public class QConfig implements Serializable {
     /**
      * 设置编号
@@ -16,6 +19,8 @@ public class QConfig implements Serializable {
      * 公司地址
      */
     private String address;
+
+    private String about;
 
     /**
      * 联系电话1

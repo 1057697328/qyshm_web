@@ -3,10 +3,7 @@ package net.lightwing.qyshm_web.controller;
 import net.lightwing.qyshm_web.commons.util.HtmlUtils;
 import net.lightwing.qyshm_web.commons.util.PageInfo;
 import net.lightwing.qyshm_web.pojo.QNews;
-import net.lightwing.qyshm_web.service.QBottommenuService;
-import net.lightwing.qyshm_web.service.QConfigService;
-import net.lightwing.qyshm_web.service.QNewsService;
-import net.lightwing.qyshm_web.service.QQrcodeService;
+import net.lightwing.qyshm_web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("news")
 public class NewsController {
 
     @Autowired
@@ -33,8 +29,14 @@ public class NewsController {
     @Autowired
     private QQrcodeService qQrcodeService;
 
+    @Autowired
+    private QTechdevService qTechdevService;
 
-    @RequestMapping("selectWebPageInfo")
+    @Autowired
+    private QProductService qProductService;
+
+
+    @RequestMapping("news.html")
     public String selectWebPageInfo(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer limit, Model model) {
         Map<String, Object> params = new HashMap<>();
         PageInfo pageInfo = new PageInfo(page, limit);
@@ -44,8 +46,8 @@ public class NewsController {
         for (QNews str : qNewsList) {
             QNews qNews = new QNews();
             String html = HtmlUtils.Html2Text(str.getNdetail());
-            if (html.length() > 50) {
-                qNews.setNdetail(html.substring(0, 50) + "……");
+            if (html.length() > 20) {
+                qNews.setNdetail(html.substring(0, 20) + "……");
             } else {
                 qNews.setNdetail(html);
             }
@@ -61,11 +63,17 @@ public class NewsController {
         qc = qConfigService.selectPageInfo(qc);
         PageInfo qq = new PageInfo(1, 2);
         qq = qQrcodeService.selectPageInfo(qq);
+        PageInfo qt = new PageInfo(1,100000);
+        qt=qTechdevService.selectPageInfo(qt);
+        PageInfo qp = new PageInfo(1,100000);
+        qp=qProductService.selectPageInfo(qp);
         model.addAttribute("PageInfo", pageInfo);
         model.addAttribute("qb", qb);
         model.addAttribute("qc", qc);
         model.addAttribute("qq", qq);
-        return "";
+        model.addAttribute("qt", qt);
+        model.addAttribute("qp", qp);
+        return "news";
     }
 
     /**
@@ -75,7 +83,7 @@ public class NewsController {
      * @param model
      * @return
      */
-    @RequestMapping("selectById")
+    @RequestMapping("newsDetails.html")
     public String selectById(Integer cid, Model model) {
         QNews qNews = qNewsService.selectById(cid);
         PageInfo qb = new PageInfo(1, 9);
@@ -84,10 +92,16 @@ public class NewsController {
         qc = qConfigService.selectPageInfo(qc);
         PageInfo qq = new PageInfo(1, 2);
         qq = qQrcodeService.selectPageInfo(qq);
+        PageInfo qt = new PageInfo(1,100000);
+        qt=qTechdevService.selectPageInfo(qt);
+        PageInfo qp = new PageInfo(1,100000);
+        qp=qProductService.selectPageInfo(qp);
         model.addAttribute("qCoop", qNews);
         model.addAttribute("qb", qb);
         model.addAttribute("qc", qc);
         model.addAttribute("qq", qq);
-        return "";
+        model.addAttribute("qt", qt);
+        model.addAttribute("qp", qp);
+        return "newsDetails";
     }
 }

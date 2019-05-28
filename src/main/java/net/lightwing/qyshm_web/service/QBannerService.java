@@ -12,11 +12,17 @@ import tk.mybatis.mapper.entity.Example;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 @Service
 public class QBannerService {
     @Autowired
     private QBannerDao qBannerDao;
 
+    /**
+     * 不知道啊
+     * @param pageInfo
+     * @return
+     */
     public PageInfo selectPageInfo(PageInfo pageInfo) {
         pageInfo.setSort("bid");
         Page<Map<String, Object>> page = new Page<>(pageInfo.getNowpage(), pageInfo.getPagesize());
@@ -33,18 +39,27 @@ public class QBannerService {
     }
 
     public int update(QBanner qBanner) {
-        return qBannerDao.updateByPrimaryKeySelective(qBanner);
+        Example example = new Example(QBanner.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("bid",qBanner.getBid());
+        return qBannerDao.updateByExample(qBanner,example);
     }
 
     public int delete(Integer bid) {
-        return qBannerDao.deleteByPrimaryKey(bid);
+        Example example = new Example(QBanner.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("bid",bid);
+        return qBannerDao.deleteByExample(example);
     }
 
     public QBanner selectById(Integer bid) {
-        return qBannerDao.selectByPrimaryKey(bid);
+        Example example = new Example(QBanner.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("bid",bid);
+        return qBannerDao.selectOneByExample(example);
     }
     public List<QBanner> selectByName(String name) {
-        Example example = new Example(QBottommenu.class);
+        Example example = new Example(QBanner.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("href", name);
         return qBannerDao.selectByExample(example);

@@ -1,0 +1,34 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="components/header :: header('新闻详情')">
+<body>
+<div class="rows">
+    <div class="hero-head">
+        <nav class="navbar is-transparent">
+            <div class="container">
+                <div class="navbar-brand" style="margin: 0 auto;">
+                    <!--导航栏-->
+                    <div th:include="components/navbar :: navbar(${qt},${qp})"></div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div style="margin-top: 10%">
+        <div>
+            <h1 style="font-size: 30px;color: #7EB0D4;text-align: center;" class="zoujing">新闻详情</h1>
+        </div>
+        <div id="xuxian"></div>
+        <h1 style="font-size: 30px;color: #7EB0D4;text-align: center;" th:text="${qCoop?.ntitle}"></h1>
+        <div style="margin-top: 2%; ">
+            <div style="width: 90%; margin: 0 auto;">
+                <p th:utext="${qCoop?.ndetail}"></p>
+            </div>
+            <div style=" width: 400px; height: 200px; margin: 0 auto;margin: 0 auto;" >
+                <img th:src="${qCoop?.coverimg}" th:alt="${qCoop?.ntitle}">
+            </div>
+        </div>
+    </div>
+
+    <div th:include="components/foot :: foot"></div>
+</div>
+</body>
+</html>

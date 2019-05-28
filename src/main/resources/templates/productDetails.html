@@ -1,0 +1,35 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="components/header :: header('产品详情')">
+<body>
+
+<div class="rows">
+    <div class="columns">
+        <div class="column is-full-desktop" style="margin-bottom:3rem;">
+            <!--导航栏-->
+            <div th:include="components/navbar :: navbar(${qt},${qp})"></div>
+        </div>
+    </div>
+</div>
+
+
+
+    <div class="container">
+        <div>
+            <h1 style="font-size: 30px;color: #7EB0D4;text-align: center;" class="zoujing">产品中心</h1>
+        </div>
+        <div id="xuxian"></div>
+        <h1 style="font-size: 30px;color: #7EB0D4;text-align: center;" th:text="${qProduct?.pname}"></h1>
+        <div style="margin-top: 2%; ">
+            <div style=" width: 400px; height: 200px; margin: 0 auto;">
+                <img th:src="${qProduct?.qcoverimg}" th:alt="${qProduct?.pname}">
+            </div>
+            <div style="width: 90%; margin: 0 auto;">
+                <p th:utext="${qProduct?.qdetail}"></p>
+            </div>
+        </div>
+    </div>
+
+    <div th:include="components/foot :: foot"></div>
+</div>
+</body>
+</html>

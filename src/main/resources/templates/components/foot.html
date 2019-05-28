@@ -11,43 +11,43 @@
                 <div class="container">
                     <div class="columns is-multiline" style="margin-top: 6%;margin-bottom: 5%">
                         <div class="foot column is-8-desktop is-full-mobile">
-                            <div class="columns is-multiline has-text-centered">
+                            <div class="columns is-multiline has-text-centered" th:if="${qb?.rows!=null}" th:each="item:${qb?.rows}">
                                 <div class="column is-4-desktop is-full-mobile">
-                                    菜单
+                                    <a th:text="${item?.bmtitle}" href="javasrcipt:void(0)"></a>
                                 </div>
-                                <div class="column is-4-desktop is-full-mobile">
-                                    菜单
-                                </div>
-                                <div class="column is-4-desktop is-full-mobile">
-                                    菜单
-                                </div>
-                                <div class="column is-4-desktop is-full-mobile">
-                                    菜单
-                                </div>
-                                <div class="column is-4-desktop is-full-mobile">
-                                    菜单
-                                </div>
-                                <div class="column is-4-desktop is-full-mobile">
-                                    菜单
-                                </div>
-                                <div class="column is-4-desktop is-full-mobile">
-                                    菜单
-                                </div>
-                                <div class="column is-4-desktop is-full-mobile">
-                                    菜单
-                                </div>
-                                <div class="column is-4-desktop is-full-mobile">
-                                    菜单
-                                </div>
-                                <div class="column is-4-desktop is-full-mobile">
-                                    菜单
-                                </div>
-                                <div class="column is-4-desktop is-full-mobile">
-                                    菜单
-                                </div>
-                                <div class="column is-4-desktop is-full-mobile">
-                                    菜单
-                                </div>
+                                <!--                                <div class="column is-4-desktop is-full-mobile">-->
+                                <!--                                    菜单-->
+                                <!--                                </div>-->
+                                <!--                                <div class="column is-4-desktop is-full-mobile">-->
+                                <!--                                    菜单-->
+                                <!--                                </div>-->
+                                <!--                                <div class="column is-4-desktop is-full-mobile">-->
+                                <!--                                    菜单-->
+                                <!--                                </div>-->
+                                <!--                                <div class="column is-4-desktop is-full-mobile">-->
+                                <!--                                    菜单-->
+                                <!--                                </div>-->
+                                <!--                                <div class="column is-4-desktop is-full-mobile">-->
+                                <!--                                    菜单-->
+                                <!--                                </div>-->
+                                <!--                                <div class="column is-4-desktop is-full-mobile">-->
+                                <!--                                    菜单-->
+                                <!--                                </div>-->
+                                <!--                                <div class="column is-4-desktop is-full-mobile">-->
+                                <!--                                    菜单-->
+                                <!--                                </div>-->
+                                <!--                                <div class="column is-4-desktop is-full-mobile">-->
+                                <!--                                    菜单-->
+                                <!--                                </div>-->
+                                <!--                                <div class="column is-4-desktop is-full-mobile">-->
+                                <!--                                    菜单-->
+                                <!--                                </div>-->
+                                <!--                                <div class="column is-4-desktop is-full-mobile">-->
+                                <!--                                    菜单-->
+                                <!--                                </div>-->
+                                <!--                                <div class="column is-4-desktop is-full-mobile">-->
+                                <!--                                    菜单-->
+                                <!--                                </div>-->
                             </div>
                         </div>
                         <div class="footCode column is-4-desktop is-full-mobile">
@@ -59,11 +59,11 @@
                                     <img th:src="@{~/images/qrcode.png}" alt="">
                                 </div>
                             </div>
-                            <div>
-                                <span>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span><br/>
-                                <span>400-*****-****</span><br/>
-                                <span>0755-******-*****</span><br/>
-                                <span>qysm******.com</span><br/>
+                            <div th:if="${qc?.rows!=null}"  th:each="item:${qc?.rows}">
+                                <label></label><span th:text="${item?.address}"></span><br/>
+                                <span th:text="${item?.phone1}">400-*****-****</span><br/>
+                                <span th:text="${item?.phone2}">0755-******-*****</span><br/>
+                                <span th:text="${item?.email1}">qysm******.com</span><br/>
                             </div>
 
                         </div>
@@ -86,6 +86,9 @@
             </div>
         </div>
     </footer>
+
+    <script th:src="@{~/js/jquery-3.4.1.min.js}"></script>
+
 </div>
 </body>
 </html>

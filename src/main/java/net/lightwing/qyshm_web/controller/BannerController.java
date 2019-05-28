@@ -1,10 +1,8 @@
 package net.lightwing.qyshm_web.controller;
 
+import com.alibaba.fastjson.JSON;
 import net.lightwing.qyshm_web.commons.util.PageInfo;
-import net.lightwing.qyshm_web.service.QBannerService;
-import net.lightwing.qyshm_web.service.QBottommenuService;
-import net.lightwing.qyshm_web.service.QConfigService;
-import net.lightwing.qyshm_web.service.QQrcodeService;
+import net.lightwing.qyshm_web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("banner")
 public class BannerController {
     @Autowired
     private QBannerService qBannerService;
@@ -29,7 +26,14 @@ public class BannerController {
     @Autowired
     private QQrcodeService qQrcodeService;
 
-    @RequestMapping("selectWebPage")
+    @Autowired
+    private QTechdevService qTechdevService;
+
+    @Autowired
+    private QProductService qProductService;
+
+
+    @RequestMapping("index.html")
     public String selectWebPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "6") Integer limit, Model model) {
         Map<String, Object> params = new HashMap<>();
         PageInfo pageInfo = new PageInfo(page, limit);
@@ -40,10 +44,16 @@ public class BannerController {
         qc = qConfigService.selectPageInfo(qc);
         PageInfo qq = new PageInfo(1, 2);
         qq = qQrcodeService.selectPageInfo(qq);
+        PageInfo qt = new PageInfo(1,100000);
+        qt=qTechdevService.selectPageInfo(qt);
         model.addAttribute("PageInfo", pageInfo);
+        PageInfo qp = new PageInfo(1,100000);
+        qp=qProductService.selectPageInfo(qp);
         model.addAttribute("qb", qb);
         model.addAttribute("qc", qc);
         model.addAttribute("qq", qq);
-        return "";
+        model.addAttribute("qt", qt);
+        model.addAttribute("qp", qp);
+        return "index";
     }
 }

@@ -1,22 +1,21 @@
 package net.lightwing.qyshm_web.controller;
 
+import net.lightwing.qyshm_web.commons.util.HtmlUtils;
 import net.lightwing.qyshm_web.commons.util.PageInfo;
 import net.lightwing.qyshm_web.pojo.QTechdev;
-import net.lightwing.qyshm_web.service.QBottommenuService;
-import net.lightwing.qyshm_web.service.QConfigService;
-import net.lightwing.qyshm_web.service.QQrcodeService;
-import net.lightwing.qyshm_web.service.QTechdevService;
+import net.lightwing.qyshm_web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("techdev")
 public class TechdevController {
 
     @Autowired
@@ -31,22 +30,47 @@ public class TechdevController {
     @Autowired
     private QQrcodeService qQrcodeService;
 
-    @RequestMapping("selectWebPageInfo")
+    @Autowired
+    private QProductService qProductService;
+
+    @RequestMapping("techdev.html")
     public String selectWebPageInfo(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "15") Integer limit, Model model) {
         Map<String, Object> params = new HashMap<>();
         PageInfo pageInfo = new PageInfo(page, limit);
         pageInfo = qTechdevService.selectPageInfo(pageInfo);
+        List<QTechdev> qNewsList = pageInfo.getRows();
+        List<QTechdev> qNewsResult = new ArrayList<>();
+        for (QTechdev str : qNewsList) {
+            QTechdev qNews = new QTechdev();
+            String html = HtmlUtils.Html2Text(str.getTdetail());
+            if (html.length() > 20) {
+                qNews.setTdetail(html.substring(0, 20) + "……");
+            } else {
+                qNews.setTdetail(html);
+            }
+            qNews.setCreatetime(str.getCreatetime());
+            qNews.setTtitle(str.getTtitle());
+            qNews.setTid(str.getTid());
+            qNewsResult.add(qNews);
+        }
         PageInfo qb = new PageInfo(1, 9);
         qb = qBottommenuService.selectPageInfo(qb);
         PageInfo qc = new PageInfo(1, 1);
         qc = qConfigService.selectPageInfo(qc);
         PageInfo qq = new PageInfo(1, 2);
         qq = qQrcodeService.selectPageInfo(qq);
+        PageInfo qp = new PageInfo(1,100000);
+        qp=qProductService.selectPageInfo(qp);
+        PageInfo qt = new PageInfo(1, 100000);
+        qt = qTechdevService.selectPageInfo(qt);
+
         model.addAttribute("PageInfo", pageInfo);
         model.addAttribute("qb", qb);
         model.addAttribute("qc", qc);
         model.addAttribute("qq", qq);
-        return "";
+        model.addAttribute("qt", qt);
+        model.addAttribute("qp", qp);
+        return "techdev";
     }
 
     /**
@@ -56,7 +80,7 @@ public class TechdevController {
      * @param model
      * @return
      */
-    @RequestMapping("selectById")
+    @RequestMapping("techdevDetails.html")
     public String selectById(Integer cid, Model model) {
         QTechdev qTechdev = qTechdevService.selectById(cid);
         PageInfo qb = new PageInfo(1, 9);
@@ -65,10 +89,16 @@ public class TechdevController {
         qc = qConfigService.selectPageInfo(qc);
         PageInfo qq = new PageInfo(1, 2);
         qq = qQrcodeService.selectPageInfo(qq);
+        PageInfo qp = new PageInfo(1,100000);
+        qp=qProductService.selectPageInfo(qp);
+        PageInfo qt = new PageInfo(1,100000);
+        qt=qTechdevService.selectPageInfo(qt);
         model.addAttribute("qCoop", qTechdev);
         model.addAttribute("qb", qb);
         model.addAttribute("qc", qc);
         model.addAttribute("qq", qq);
-        return "";
+        model.addAttribute("qp", qp);
+        model.addAttribute("qt", qt);
+        return "techdevDetails";
     }
 }

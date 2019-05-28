@@ -9,6 +9,9 @@
     <sql id="Base_Column_List">
     bid, href, imgpath
   </sql>
+    <delete id="deleteBanner">
+        delete * from q_banner where bid=#{bid};
+    </delete>
     <select id="selectPage" resultType="java.util.Map" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include> from q_banner
     </select>

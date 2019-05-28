@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<div th:fragment="navbar">
+<div th:fragment="navbar(qt,qp)">
+    <div class="container">
     <div class="content">
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="https://bulma.io">
-                    <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+                    <img th:src="@{~/images/logo.png}" style="max-height:5rem;" >
                 </a>
 
                 <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
@@ -20,44 +21,42 @@
                 </a>
             </div>
 
-            <div id="navbarBasicExample" class="navbar-menu">
-                <div class="navbar-start">
-                    <a class="navbar-item">
-                        首页
+            <div class="navbar-menu">
+                <div class="navbar-start menu_a">
+                    <a class="navbar-item"  href="/index.html">
+                         首页
                     </a>
 
-                    <a class="navbar-item">
-                        关于起源
+                    <a class="navbar-item" href="/about.html">
+                         关于起源
                     </a>
 
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
+                        <a class="navbar-link" href="/techdev.html">
                             技术研发
                         </a>
 
-                        <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                ...
+                        <div class="navbar-dropdown" >
+                            <a class="navbar-item" th:if="${qt?.rows!=null}"  th:each="item:${qt?.rows}" th:text="${item?.ttitle}">
                             </a>
                         </div>
                     </div>
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
+                        <a class="navbar-link" href="/product.html">
                             产品中心
                         </a>
 
-                        <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                ...
+                        <div class="navbar-dropdown" >
+                            <a class="navbar-item" th:if="${qp?.rows!=null}" th:each="items:${qp?.rows}" th:text="${items?.pname}" th:href="'productDetails.html?cid='+${item?.pid}">
                             </a>
                         </div>
                     </div>
 
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="/news.html">
                         企业新闻
                     </a>
 
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="/contactUs.html">
                         联系我们
                     </a>
 
@@ -65,12 +64,16 @@
             </div>
         </nav>
     </div>
+    </div>
+
+
+
 </div>
 </body>
+
+
+
 <style>
-    .navbar.is-spaced {
-        /*padding: 1rem 2rem;*/
-        text-align: center;
-    }
+
 </style>
 </html>

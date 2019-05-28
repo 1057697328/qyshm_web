@@ -4,12 +4,13 @@
     <resultMap id="BaseResultMap" type="net.lightwing.qyshm_web.pojo.QProduct">
         <id column="pid" jdbcType="INTEGER" property="pid"/>
         <result column="qcoverimg" jdbcType="VARCHAR" property="qcoverimg"/>
+        <result column="pname"  property="pname"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.lightwing.qyshm_web.pojo.QProduct">
         <result column="qdetail" jdbcType="LONGVARCHAR" property="qdetail"/>
     </resultMap>
     <sql id="Base_Column_List">
-    pid, qcoverimg
+    pid, qcoverimg,pname
   </sql>
     <sql id="Blob_Column_List">
     qdetail

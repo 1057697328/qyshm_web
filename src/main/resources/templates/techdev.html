@@ -1,0 +1,43 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="components/header :: header('技术研发列表')">
+<body>
+
+<div class="rows">
+    <div class="columns">
+        <div class="column is-full-desktop" style="margin-bottom:3rem;">
+            <!--导航栏-->
+            <div th:include="components/navbar :: navbar(${qt},${qp})"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container has-text-centered">
+
+
+    <div>
+        <h1 style="font-size: 30px;color: #7EB0D4;text-align: center; margin-bottom: 1%;" class="zoujing">
+            技术研发</h1>
+    </div>
+    <div id="xuxian"></div>
+
+
+    <div class="columns is-multiline " style="margin:0 auto">
+        <div class="column is-3" th:each="item:${PageInfo.rows}">
+            <div class="tile is-parent is-vertical">
+                <article class="tile is-child notification is-primary">
+                    <p class="title">
+                        <a th:text="${item?.ttitle}" th:href="'/techdevDetails.html?cid='+${item?.tid}"></a>
+                    </p>
+                    <p class="subtitle" th:text="${item?.tdetail}"></p>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:include="components/foot :: foot"></div>
+
+</div>
+</body>
+</html>
