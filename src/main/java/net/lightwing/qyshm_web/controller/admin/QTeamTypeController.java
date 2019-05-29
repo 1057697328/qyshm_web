@@ -34,7 +34,7 @@ public class QTeamTypeController {
 
     @RequestMapping("insert")
     @ResponseBody
-    public Wrapper insert(@RequestBody QTeamtype qTeamtype) {
+    public Wrapper insert(QTeamtype qTeamtype) {
         List<QTeamtype> qTeamList = qTeamTypeService.selectByName(qTeamtype.getTtypename());
         if (qTeamList.size() > 0) {
             return WrapMapper.ok().message("该团队类型名称已存在");
@@ -45,7 +45,7 @@ public class QTeamTypeController {
 
     @RequestMapping("update")
     @ResponseBody
-    public Wrapper update(@RequestBody QTeamtype qTeamtype) {
+    public Wrapper update(QTeamtype qTeamtype) {
         qTeamTypeService.update(qTeamtype);
         return WrapMapper.ok().message("修改成功");
     }

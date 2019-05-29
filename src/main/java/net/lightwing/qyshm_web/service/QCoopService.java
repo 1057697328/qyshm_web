@@ -34,11 +34,17 @@ public class QCoopService {
     }
 
     public int update(QCoop qCoop) {
-        return qCoopDao.updateByPrimaryKeySelective(qCoop);
+        Example example = new Example(QCoop.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("cid",qCoop.getCid());
+        return qCoopDao.updateByExample(qCoop,example);
     }
 
     public int delete(Integer cid) {
-        return qCoopDao.deleteByPrimaryKey(cid);
+        Example example = new Example(QCoop.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("cid",cid);
+        return qCoopDao.deleteByExample(example);
     }
 
     public List<QCoop> selectByName(String name) {
@@ -49,7 +55,9 @@ public class QCoopService {
     }
 
     public QCoop selectById(Integer cid) {
-        return qCoopDao.selectByPrimaryKey(cid);
+        Example example = new Example(QCoop.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("cid", cid);
+        return qCoopDao.selectOneByExample(example);
     }
-
 }

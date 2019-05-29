@@ -34,23 +34,33 @@ public class QTeamTypeService {
     }
 
     public int update(QTeamtype qTeamtype) {
-        return qTeamtypeDao.updateByPrimaryKeySelective(qTeamtype);
+        Example example = new Example(QTeam.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("ttypeid",qTeamtype.getTtypeid());
+        return qTeamtypeDao.updateByExample(qTeamtype,example);
     }
 
     public int delete(Integer cid) {
-        return qTeamtypeDao.deleteByPrimaryKey(cid);
+        Example example = new Example(QTeamtype.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("ttypeid",cid);
+        return qTeamtypeDao.deleteByExample(example);
     }
 
     public List<QTeamtype> selectByName(String name) {
-        Example example = new Example(QTeam.class);
+        Example example = new Example(QTeamtype.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("ttypename", name);
         return qTeamtypeDao.selectByExample(example);
     }
 
     public QTeamtype selectById(Integer cid) {
-        return qTeamtypeDao.selectByPrimaryKey(cid);
+        Example example = new Example(QTeamtype.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("ttypeid", cid);
+        return qTeamtypeDao.selectOneByExample(example);
     }
+
 
 
 }

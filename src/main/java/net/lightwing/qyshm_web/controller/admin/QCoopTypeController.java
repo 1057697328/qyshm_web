@@ -34,7 +34,7 @@ public class QCoopTypeController {
 
     @RequestMapping("insert")
     @ResponseBody
-    public Wrapper insert(@RequestBody QCooptype qCooptype) {
+    public Wrapper insert(QCooptype qCooptype) {
         List<QCooptype> qCoopTypeList = qCooptypeService.selectByName(qCooptype.getCtypename());
         if (qCoopTypeList.size() > 0) {
             return WrapMapper.ok().message("该合作机构类型已存在");
@@ -45,7 +45,7 @@ public class QCoopTypeController {
 
     @RequestMapping("update")
     @ResponseBody
-    public Wrapper update(@RequestBody QCooptype qCooptype) {
+    public Wrapper update(QCooptype qCooptype) {
         qCooptypeService.update(qCooptype);
         return WrapMapper.ok().message("修改成功");
     }

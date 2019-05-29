@@ -35,7 +35,7 @@ public class QProductController {
 
     @RequestMapping("insert")
     @ResponseBody
-    public Wrapper insert(QProduct qProduct, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper insert(QProduct qProduct, @RequestParam(value = "imgFile",required = false) MultipartFile file) {
         if (StringUtils.isNotBlank(file.getOriginalFilename())) {
             qProduct.setQcoverimg(null);
             if (qProduct.getQcoverimg() != null) {
@@ -53,19 +53,21 @@ public class QProductController {
 
     @RequestMapping("update")
     @ResponseBody
-    public Wrapper update(QProduct qProduct, @RequestParam("imgFile") MultipartFile file) {
-        if (StringUtils.isNotBlank(file.getOriginalFilename())) {
-            qProduct.setQcoverimg(null);
-            if (qProduct.getQcoverimg() != null) {
-                String deletepath = qProduct.getQcoverimg().substring(1, qProduct.getQcoverimg().length());
-                UPLOAD.deleteFile(deletepath);
-            }
-            Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
-            if ((int) upload.get("code") == 200) {
-                qProduct.setQcoverimg("/pictures/" + upload.get("filename"));
-                QProduct result = qProductService.selectById(qProduct.getPid());
-                if (result.getQcoverimg() != null) {
-                    UPLOAD.deleteFile(result.getQcoverimg());
+    public Wrapper update(QProduct qProduct,@RequestParam(value = "imgFile",required = false)  MultipartFile file) {
+        if(file != null) {
+            if (StringUtils.isNotBlank(file.getOriginalFilename())) {
+                qProduct.setQcoverimg(null);
+                if (qProduct.getQcoverimg() != null) {
+                    String deletepath = qProduct.getQcoverimg().substring(1, qProduct.getQcoverimg().length());
+                    UPLOAD.deleteFile(deletepath);
+                }
+                Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
+                if ((int) upload.get("code") == 200) {
+                    qProduct.setQcoverimg("/pictures/" + upload.get("filename"));
+                    QProduct result = qProductService.selectById(qProduct.getPid());
+                    if (result.getQcoverimg() != null) {
+                        UPLOAD.deleteFile(result.getQcoverimg());
+                    }
                 }
             }
         }

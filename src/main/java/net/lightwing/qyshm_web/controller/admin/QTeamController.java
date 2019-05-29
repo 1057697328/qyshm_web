@@ -6,6 +6,7 @@ import net.lightwing.qyshm_web.commons.wrapper.WrapMapper;
 import net.lightwing.qyshm_web.commons.wrapper.Wrapper;
 import net.lightwing.qyshm_web.pojo.QTeam;
 import net.lightwing.qyshm_web.service.QTeamService;
+import net.lightwing.qyshm_web.service.QTeamTypeService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ public class QTeamController {
     @Autowired
     private QTeamService qTeamService;
 
+
     @RequestMapping("selectAdminPageInfo")
     @ResponseBody
     public Wrapper selectAdminPageInfo(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "15") Integer limit) {
@@ -36,20 +38,22 @@ public class QTeamController {
 
     @RequestMapping("insert")
     @ResponseBody
-    public Wrapper insert(QTeam qTeam, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper insert(QTeam qTeam, @RequestParam(value = "imgFile", required = false) MultipartFile file) {
         List<QTeam> qTeamList = qTeamService.selectByName(qTeam.getName());
         if (qTeamList.size() > 0) {
             return WrapMapper.ok().message("该人员姓名已存在");
         }
-        if (StringUtils.isNotBlank(file.getOriginalFilename())) {
-            qTeam.setTheadimg(null);
-            if (qTeam.getTheadimg() != null) {
-                String deletepath = qTeam.getTheadimg().substring(1, qTeam.getTheadimg().length());
-                UPLOAD.deleteFile(deletepath);
-            }
-            Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
-            if ((int) upload.get("code") == 200) {
-                qTeam.setTheadimg("/pictures/" + upload.get("filename"));
+        if(file!=null) {
+            if (StringUtils.isNotBlank(file.getOriginalFilename())) {
+                qTeam.setTheadimg(null);
+                if (qTeam.getTheadimg() != null) {
+                    String deletepath = qTeam.getTheadimg().substring(1, qTeam.getTheadimg().length());
+                    UPLOAD.deleteFile(deletepath);
+                }
+                Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
+                if ((int) upload.get("code") == 200) {
+                    qTeam.setTheadimg("/pictures/" + upload.get("filename"));
+                }
             }
         }
         qTeamService.insert(qTeam);
@@ -58,19 +62,21 @@ public class QTeamController {
 
     @RequestMapping("update")
     @ResponseBody
-    public Wrapper update(QTeam qTeam, @RequestParam("imgFile") MultipartFile file) {
-        if (StringUtils.isNotBlank(file.getOriginalFilename())) {
-            qTeam.setTheadimg(null);
-            if (qTeam.getTheadimg() != null) {
-                String deletepath = qTeam.getTheadimg().substring(1, qTeam.getTheadimg().length());
-                UPLOAD.deleteFile(deletepath);
-            }
-            Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
-            if ((int) upload.get("code") == 200) {
-                qTeam.setTheadimg("/pictures/" + upload.get("filename"));
-                QTeam result = qTeamService.selectById(qTeam.getTid());
-                if (result.getTheadimg() != null) {
-                    UPLOAD.deleteFile(result.getTheadimg());
+    public Wrapper update(QTeam qTeam, @RequestParam(value = "imgFile", required = false) MultipartFile file) {
+        if (file != null) {
+            if (StringUtils.isNotBlank(file.getOriginalFilename())) {
+                qTeam.setTheadimg(null);
+                if (qTeam.getTheadimg() != null) {
+                    String deletepath = qTeam.getTheadimg().substring(1, qTeam.getTheadimg().length());
+                    UPLOAD.deleteFile(deletepath);
+                }
+                Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
+                if ((int) upload.get("code") == 200) {
+                    qTeam.setTheadimg("/pictures/" + upload.get("filename"));
+                    QTeam result = qTeamService.selectById(qTeam.getTid());
+                    if (result.getTheadimg() != null) {
+                        UPLOAD.deleteFile(result.getTheadimg());
+                    }
                 }
             }
         }

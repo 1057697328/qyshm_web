@@ -33,11 +33,17 @@ public class QTeamService {
     }
 
     public int update(QTeam qTeam) {
-        return qTeamDao.updateByPrimaryKeySelective(qTeam);
+        Example example = new Example(QTeam.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("tid",qTeam.getTid());
+        return qTeamDao.updateByExample(qTeam,example);
     }
 
     public int delete(Integer cid) {
-        return qTeamDao.deleteByPrimaryKey(cid);
+        Example example = new Example(QTeam.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("tid",cid);
+        return qTeamDao.deleteByExample(example);
     }
 
     public List<QTeam> selectByName(String name) {
@@ -48,8 +54,10 @@ public class QTeamService {
     }
 
     public QTeam selectById(Integer cid) {
-        return qTeamDao.selectByPrimaryKey(cid);
+        Example example = new Example(QTeam.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("tid", cid);
+        return qTeamDao.selectOneByExample(example);
     }
-
 
 }

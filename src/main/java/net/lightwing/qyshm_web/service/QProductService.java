@@ -3,6 +3,7 @@ package net.lightwing.qyshm_web.service;
 import com.baomidou.mybatisplus.plugins.Page;
 import net.lightwing.qyshm_web.commons.util.PageInfo;
 import net.lightwing.qyshm_web.dao.QProductDao;
+import net.lightwing.qyshm_web.pojo.QBanner;
 import net.lightwing.qyshm_web.pojo.QNews;
 import net.lightwing.qyshm_web.pojo.QProduct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,22 +36,31 @@ public class QProductService {
     }
 
     public int update(QProduct qProduct) {
-        return qProductDao.updateByPrimaryKeySelective(qProduct);
+        Example example = new Example(QProduct.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("pid",qProduct.getPid());
+        return qProductDao.updateByExample(qProduct,example);
     }
 
     public int delete(Integer cid) {
-        return qProductDao.deleteByPrimaryKey(cid);
+        Example example = new Example(QProduct.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("pid",cid);
+        return qProductDao.deleteByExample(example);
     }
 
-//    public List<QProduct> selectByName(String name) {
-//        Example example = new Example(QProduct.class);
-//        Example.Criteria criteria = example.createCriteria();
-//        criteria.andEqualTo("ntitle", name);
-//        return qProductDao.selectByExample(example);
-//    }
+    public List<QProduct> selectByName(String name) {
+        Example example = new Example(QProduct.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("pname", name);
+        return qProductDao.selectByExample(example);
+    }
 
     public QProduct selectById(Integer cid) {
-        return qProductDao.selectByPrimaryKey(cid);
+        Example example = new Example(QProduct.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("pid", cid);
+        return qProductDao.selectOneByExample(example);
     }
 
 }

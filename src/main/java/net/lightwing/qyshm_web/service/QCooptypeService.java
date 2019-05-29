@@ -34,11 +34,17 @@ public class QCooptypeService {
     }
 
     public int update(QCooptype qCooptype) {
-        return qCooptypeDao.updateByPrimaryKeySelective(qCooptype);
+        Example example = new Example(QCooptype.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("ctypeid",qCooptype.getCtypeid());
+        return qCooptypeDao.updateByExample(qCooptype,example);
     }
 
     public int delete(Integer cid) {
-        return qCooptypeDao.deleteByPrimaryKey(cid);
+        Example example = new Example(QCooptype.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("ctypeid",cid);
+        return qCooptypeDao.deleteByExample(example);
     }
 
     public List<QCooptype> selectByName(String name) {
@@ -49,7 +55,9 @@ public class QCooptypeService {
     }
 
     public QCooptype selectById(Integer cid) {
-        return qCooptypeDao.selectByPrimaryKey(cid);
+        Example example = new Example(QCooptype.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("ctypeid", cid);
+        return qCooptypeDao.selectOneByExample(example);
     }
-
 }
