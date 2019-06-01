@@ -34,11 +34,17 @@ public class QNewsService {
     }
 
     public int update(QNews qNews) {
-        return qNewsDao.updateByPrimaryKeySelective(qNews);
+        Example example = new Example(QNews.class);
+        Example.Criteria Criteria = example.createCriteria();
+        Criteria.andEqualTo("nid",qNews.getNid());
+        return qNewsDao.updateByExampleSelective(qNews,example);
     }
 
     public int delete(Integer cid) {
-        return qNewsDao.deleteByPrimaryKey(cid);
+        Example example = new Example(QNews.class);
+        Example.Criteria Criteria = example.createCriteria();
+        Criteria.andEqualTo("nid",cid);
+        return qNewsDao.deleteByExample(example);
     }
 
     public List<QNews> selectByName(String name) {

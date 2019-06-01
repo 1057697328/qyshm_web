@@ -12,6 +12,7 @@ import tk.mybatis.mapper.entity.Example;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class QBottommenuService {
@@ -35,11 +36,17 @@ public class QBottommenuService {
     }
 
     public int update(QBottommenu qBottommenu) {
-        return qBottommenuDao.updateByPrimaryKeySelective(qBottommenu);
+        Example example = new Example(QBottommenu.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("bmid", qBottommenu.getBmid());
+        return qBottommenuDao.updateByExample(qBottommenu,example);
     }
 
     public int delete(Integer bmid) {
-        return qBottommenuDao.deleteByPrimaryKey(bmid);
+        Example example = new Example(QBottommenu.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("bmid", bmid);
+        return qBottommenuDao.deleteByExample(example);
     }
 
     public QBottommenu selectById(Integer bmid) {

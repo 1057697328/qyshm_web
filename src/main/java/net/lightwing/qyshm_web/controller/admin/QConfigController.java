@@ -58,8 +58,8 @@ public class QConfigController {
 
     @RequestMapping("selectById")
     @ResponseBody
-    public Wrapper selectById(Integer bmid) {
-        QConfig QConfig = qConfigService.selectById(bmid);
+    public Wrapper selectById(Integer cid) {
+        QConfig QConfig = qConfigService.selectById(cid);
         return WrapMapper.ok().result(QConfig);
     }
 

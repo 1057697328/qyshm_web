@@ -37,7 +37,7 @@ public class QBottommenuController {
     public Wrapper insert(@RequestBody QBottommenu qBottommenu) {
         List<QBottommenu> result = qBottommenuService.selectByName(qBottommenu.getBmtitle());
         if (result.size() > 0) {
-            return WrapMapper.ok().message("该链接已存在");
+            return WrapMapper.ok().message("底部菜单名称已存在");
         }
         qBottommenuService.insert(qBottommenu);
         return WrapMapper.ok().message("新增成功");

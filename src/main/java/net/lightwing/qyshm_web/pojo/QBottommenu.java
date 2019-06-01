@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * q_bottommenu
- * @author 
+ * @author Clarence
  */
 public class QBottommenu implements Serializable {
     /**
@@ -21,6 +21,26 @@ public class QBottommenu implements Serializable {
      * 底部链接地址
      */
     private String bmhref;
+
+    private Integer bmstatus;
+
+    private String bmdetail;
+
+    public Integer getBmstatus() {
+        return bmstatus;
+    }
+
+    public void setBmstatus(Integer bmstatus) {
+        this.bmstatus = bmstatus;
+    }
+
+    public String getBmdetail() {
+        return bmdetail;
+    }
+
+    public void setBmdetail(String bmdetail) {
+        this.bmdetail = bmdetail;
+    }
 
     private static final long serialVersionUID = 1L;
 

@@ -52,8 +52,8 @@ public class QTechdevController {
 
     @RequestMapping("delete")
     @ResponseBody
-    public Wrapper delete(Integer nid) {
-        qTechdevService.delete(nid);
+    public Wrapper delete(Integer tid) {
+        qTechdevService.delete(tid);
         return WrapMapper.ok().message("删除成功");
     }
 

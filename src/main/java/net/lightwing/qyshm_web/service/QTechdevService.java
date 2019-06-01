@@ -12,6 +12,7 @@ import tk.mybatis.mapper.entity.Example;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 @Service
 public class QTechdevService {
 
@@ -34,15 +35,21 @@ public class QTechdevService {
     }
 
     public int update(QTechdev qTechdev) {
-        return qTechdevDao.updateByPrimaryKeySelective(qTechdev);
+        Example example = new Example(QTechdev.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("tid",qTechdev.getTid());
+        return qTechdevDao.updateByExample(qTechdev,example);
     }
 
-    public int delete(Integer cid) {
-        return qTechdevDao.deleteByPrimaryKey(cid);
+    public int delete(Integer tid) {
+        Example example = new Example(QTechdev.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("tid",tid);
+        return qTechdevDao.deleteByExample(example);
     }
 
     public List<QTechdev> selectByName(String name) {
-        Example example = new Example(QTeam.class);
+        Example example = new Example(QTechdev.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("ttitle", name);
         return qTechdevDao.selectByExample(example);

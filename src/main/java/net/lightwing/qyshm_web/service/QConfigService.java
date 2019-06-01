@@ -35,7 +35,10 @@ public class QConfigService {
     }
 
     public int update(QConfig qConfig) {
-        return qConfigDao.updateByPrimaryKeySelective(qConfig);
+        Example example = new Example(QConfig.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("cid", qConfig.getCid());
+        return qConfigDao.updateByExample(qConfig,example);
     }
 
     public int delete(Integer cid) {
@@ -50,7 +53,10 @@ public class QConfigService {
     }
 
     public QConfig selectById(Integer cid) {
-        return qConfigDao.selectByPrimaryKey(cid);
+        Example example = new Example(QConfig.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("cid", cid);
+        return qConfigDao.selectOneByExample(example);
     }
 
 }

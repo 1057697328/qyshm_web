@@ -28,7 +28,7 @@ public class FileController
                     Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
                     if((int)upload.get("code")== 200)
                     {
-                        uploadPath.add("/pictures/"+upload.get("filename"));
+                        uploadPath.add(Constant.DOMAIN+"/pictures/"+upload.get("filename"));
                     }
                 }
             }

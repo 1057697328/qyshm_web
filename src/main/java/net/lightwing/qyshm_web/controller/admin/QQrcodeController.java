@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 @Controller
 @RequestMapping("admin/qrcode")
 public class QQrcodeController {
@@ -35,16 +36,18 @@ public class QQrcodeController {
 
     @RequestMapping("insert")
     @ResponseBody
-    public Wrapper insert(QQrcode qrcode, @RequestParam("imgFile") MultipartFile file) {
-        if (StringUtils.isNotBlank(file.getOriginalFilename())) {
-            qrcode.setImgpath(null);
-            if (qrcode.getImgpath() != null) {
-                String deletepath = qrcode.getImgpath().substring(1, qrcode.getImgpath().length());
-                UPLOAD.deleteFile(deletepath);
-            }
-            Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
-            if ((int) upload.get("code") == 200) {
-                qrcode.setImgpath("/pictures/" + upload.get("filename"));
+    public Wrapper insert(QQrcode qrcode, @RequestParam(value = "imgFile",required = false) MultipartFile file) {
+        if(file!=null) {
+            if (StringUtils.isNotBlank(file.getOriginalFilename())) {
+                qrcode.setImgpath(null);
+                if (qrcode.getImgpath() != null) {
+                    String deletepath = qrcode.getImgpath().substring(1, qrcode.getImgpath().length());
+                    UPLOAD.deleteFile(deletepath);
+                }
+                Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
+                if ((int) upload.get("code") == 200) {
+                    qrcode.setImgpath("/pictures/" + upload.get("filename"));
+                }
             }
         }
         qQrcodeService.insert(qrcode);
@@ -54,18 +57,16 @@ public class QQrcodeController {
     @RequestMapping("update")
     @ResponseBody
     public Wrapper update(QQrcode qrcode, @RequestParam("imgFile") MultipartFile file) {
-        if (StringUtils.isNotBlank(file.getOriginalFilename())) {
-            qrcode.setImgpath(null);
-            if (qrcode.getImgpath() != null) {
-                String deletepath = qrcode.getImgpath().substring(1, qrcode.getImgpath().length());
-                UPLOAD.deleteFile(deletepath);
-            }
-            Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
-            if ((int) upload.get("code") == 200) {
-                qrcode.setImgpath("/pictures/" + upload.get("filename"));
-                QQrcode result = qQrcodeService.selectById(qrcode.getQid());
-                if (result.getImgpath() != null) {
-                    UPLOAD.deleteFile(result.getImgpath());
+        if(file!=null) {
+            if (StringUtils.isNotBlank(file.getOriginalFilename())) {
+                qrcode.setImgpath(null);
+                if (qrcode.getImgpath() != null) {
+                    String deletepath = qrcode.getImgpath().substring(1, qrcode.getImgpath().length());
+                    UPLOAD.deleteFile(deletepath);
+                }
+                Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
+                if ((int) upload.get("code") == 200) {
+                    qrcode.setImgpath("/pictures/" + upload.get("filename"));
                 }
             }
         }
@@ -75,12 +76,12 @@ public class QQrcodeController {
 
     @RequestMapping("delete")
     @ResponseBody
-    public Wrapper delete(Integer nid) {
-        QQrcode result = qQrcodeService.selectById(nid);
+    public Wrapper delete(Integer qid) {
+        QQrcode result = qQrcodeService.selectById(qid);
         if (result.getImgpath() != null) {
             UPLOAD.deleteFile(result.getImgpath());
         }
-        qQrcodeService.delete(nid);
+        qQrcodeService.delete(qid);
         return WrapMapper.ok().message("删除成功");
     }
 

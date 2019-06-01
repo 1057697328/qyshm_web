@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,20 +37,22 @@ public class QNewsController {
 
     @RequestMapping("insert")
     @ResponseBody
-    public Wrapper insert(QNews qNews, @RequestParam("imgFile") MultipartFile file) {
+    public Wrapper insert(QNews qNews, @RequestParam(value = "imgFile",required = false) MultipartFile file) {
         List<QNews> qCoopTypeList = qNewsService.selectByName(qNews.getNtitle());
         if (qCoopTypeList.size() > 0) {
             return WrapMapper.ok().message("该新闻标题已存在");
         }
-        if (StringUtils.isNotBlank(file.getOriginalFilename())) {
-            qNews.setCoverimg(null);
-            if (qNews.getCoverimg() != null) {
-                String deletepath = qNews.getCoverimg().substring(1, qNews.getCoverimg().length());
-                UPLOAD.deleteFile(deletepath);
-            }
-            Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
-            if ((int) upload.get("code") == 200) {
-                qNews.setCoverimg("/pictures/" + upload.get("filename"));
+        if(file!=null) {
+            if (StringUtils.isNotBlank(file.getOriginalFilename())) {
+                qNews.setCoverimg(null);
+                if (qNews.getCoverimg() != null) {
+                    String deletepath = qNews.getCoverimg().substring(1, qNews.getCoverimg().length());
+                    UPLOAD.deleteFile(deletepath);
+                }
+                Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
+                if ((int) upload.get("code") == 200) {
+                    qNews.setCoverimg("/pictures/" + upload.get("filename"));
+                }
             }
         }
         qNewsService.insert(qNews);
@@ -58,22 +61,25 @@ public class QNewsController {
 
     @RequestMapping("update")
     @ResponseBody
-    public Wrapper update(QNews qNews, @RequestParam("imgFile") MultipartFile file) {
-        if (StringUtils.isNotBlank(file.getOriginalFilename())) {
-            qNews.setCoverimg(null);
-            if (qNews.getCoverimg() != null) {
-                String deletepath = qNews.getCoverimg().substring(1, qNews.getCoverimg().length());
-                UPLOAD.deleteFile(deletepath);
-            }
-            Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
-            if ((int) upload.get("code") == 200) {
-                qNews.setCoverimg("/pictures/" + upload.get("filename"));
-                QNews result = qNewsService.selectById(qNews.getNid());
-                if (result.getCoverimg() != null) {
-                    UPLOAD.deleteFile(result.getCoverimg());
+    public Wrapper update(QNews qNews, @RequestParam(value = "imgFile",required = false) MultipartFile file) {
+        if(file!=null) {
+            if (StringUtils.isNotBlank(file.getOriginalFilename())) {
+                qNews.setCoverimg(null);
+                if (qNews.getCoverimg() != null) {
+                    String deletepath = qNews.getCoverimg().substring(1, qNews.getCoverimg().length());
+                    UPLOAD.deleteFile(deletepath);
+                }
+                Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
+                if ((int) upload.get("code") == 200) {
+                    qNews.setCoverimg("/pictures/" + upload.get("filename"));
+                    QNews result = qNewsService.selectById(qNews.getNid());
+                    if (result.getCoverimg() != null) {
+                        UPLOAD.deleteFile(result.getCoverimg());
+                    }
                 }
             }
         }
+        qNews.setCreatetime(new Date());
         qNewsService.update(qNews);
         return WrapMapper.ok().message("修改成功");
     }

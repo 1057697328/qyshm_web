@@ -7,9 +7,11 @@ import net.lightwing.qyshm_web.pojo.QProduct;
 import net.lightwing.qyshm_web.pojo.QQrcode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 @Service
 public class QQrcodeService {
 
@@ -32,11 +34,17 @@ public class QQrcodeService {
     }
 
     public int update(QQrcode qrcode) {
-        return qQrcodeDao.updateByPrimaryKeySelective(qrcode);
+        Example example = new Example(QQrcode.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("qid",qrcode.getQid());
+        return qQrcodeDao.updateByExample(qrcode,example);
     }
 
     public int delete(Integer cid) {
-        return qQrcodeDao.deleteByPrimaryKey(cid);
+        Example example = new Example(QQrcode.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("qid",cid);
+        return qQrcodeDao.deleteByExample(example);
     }
 
 //    public List<QProduct> selectByName(String name) {
@@ -47,7 +55,10 @@ public class QQrcodeService {
 //    }
 
     public QQrcode selectById(Integer cid) {
-        return qQrcodeDao.selectByPrimaryKey(cid);
+        Example example = new Example(QQrcode.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("qid",cid);
+        return qQrcodeDao.selectOneByExample(example);
     }
 
 
