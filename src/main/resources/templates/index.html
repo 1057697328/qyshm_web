@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:include="components/header :: header('首页')">
 
@@ -5,58 +6,54 @@
 <body>
 <!--"-->
 <div>
+    <div class="rows">
+        <div class="columns">
+            <div class="column is-full-desktop" style="margin-bottom:2rem;">
+                <!--导航栏-->
+                <div th:include="components/navbar :: navbar(${qt},${qp})"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container is-fluid" style="margin-bottom:3rem;">
+        <div class="columns is-multiline">
+            <div class="column is-full" th:each="item : ${pageInfo.rows}">
+                <img th:src="${item.imgpath}" style="width:100%;">
+            </div>
+        </div>
+    </div>
 
         <!--轮播图-->
-        <section class="hero is-medium has-carousel">
-            <div class="hero-carousel">
-                <div class='has-background is-active'>
-                    <img class="is-background" src="https://wikiki.github.io/images/merry-christmas.jpg" alt=""/>
-                </div>
-                <div class='has-background'>
-                    <img class="is-background" src="https://wikiki.github.io/images/singer.jpg" alt=""/>
-                </div>
-                <div class='has-background'>
-                    <img class="is-background" src="https://wikiki.github.io/images/sushi.jpg" alt=""/>
-                </div>
-                <div class='has-background'>
-                    <img class="is-background" src="https://wikiki.github.io/images/life.jpg" alt=""/>
-                </div>
-            </div>
-            <div class="hero-head">
-                <nav class="navbar is-transparent">
-                    <div class="container">
-                        <div class="navbar-brand" style="margin: 0 auto;">
-                            <!--导航栏-->
-                            <div th:include="components/navbar :: navbar(${qt},${qp})"></div>
+<!--        <section class="hero is-medium has-carousel">-->
+<!--            <div class="hero-carousel">-->
+<!--                <div class='has-background is-active'>-->
+<!--                    <img class="is-background" src="https://wikiki.github.io/images/merry-christmas.jpg" alt=""/>-->
+<!--                </div>-->
+<!--                <div class='has-background'>-->
+<!--                    <img class="is-background" src="https://wikiki.github.io/images/singer.jpg" alt=""/>-->
+<!--                </div>-->
+<!--                <div class='has-background'>-->
+<!--                    <img class="is-background" src="https://wikiki.github.io/images/sushi.jpg" alt=""/>-->
+<!--                </div>-->
+<!--                <div class='has-background'>-->
+<!--                    <img class="is-background" src="https://wikiki.github.io/images/life.jpg" alt=""/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="hero-head">-->
+<!--                <nav class="navbar is-transparent">-->
+<!--                    <div class="container">-->
+<!--                        <div class="navbar-brand" style="margin: 0 auto;">-->
+<!--                            &lt;!&ndash;导航栏&ndash;&gt;-->
+<!--                            <div th:include="components/navbar :: navbar(${qt},${qp})"></div>-->
 
-                        </div>
-                    </div>
-                </nav>
-            </div>
-            <div class="hero-body has-text-centered">
-                <h1 class="title has-text-white">My Beautiful Carousel</h1>
-            </div>
-        </section>
-        <div>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-            <h2>test test</h2>
-        </div>
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </nav>-->
+<!--            </div>-->
+<!--            <div class="hero-body has-text-centered">-->
+<!--                <h1 class="title has-text-white">My Beautiful Carousel</h1>-->
+<!--            </div>-->
+<!--        </section>-->
+
 
 
         <div th:include="components/foot :: foot"></div>

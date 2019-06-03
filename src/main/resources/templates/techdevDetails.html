@@ -3,7 +3,7 @@
 <body>
 <div class="rows">
     <div class="columns">
-        <div class="column is-full-desktop" style="margin-bottom:3rem;">
+        <div class="column is-full-desktop" style="margin-bottom:1rem;">
             <!--导航栏-->
             <div th:include="components/navbar :: navbar(${qt},${qp})"></div>
         </div>
@@ -12,11 +12,10 @@
 
     <div class="container" >
         <div>
-            <h1 style="font-size: 30px;color: #7EB0D4;text-align: center;" class="zoujing">技术研发</h1>
+            <h1 style="font-size: 30px;color: #7EB0D4;text-align: center;" class="zoujing" th:text="${qCoop?.ttitle}"></h1>
         </div>
         <div id="xuxian"></div>
-        <h1 style="font-size: 30px;color: #7EB0D4;text-align: center;" th:text="${qCoop?.ttitle}"></h1>
-        <div style="margin-top: 2%; ">
+        <div style="margin-bottom:2% ">
             <div style="width: 90%; margin: 0 auto;">
                 <p th:utext="${qCoop?.tdetail}"></p>
             </div>

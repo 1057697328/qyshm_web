@@ -13,7 +13,7 @@
                     <img th:src="@{~/images/logo.png}" style="max-height:5rem;" >
                 </a>
 
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+                <a role="button" style="margin-top:1.5rem;" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
                    data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -37,7 +37,7 @@
                         </a>
 
                         <div class="navbar-dropdown" >
-                            <a class="navbar-item" th:if="${qt?.rows!=null}"  th:each="item:${qt?.rows}" th:text="${item?.ttitle}">
+                            <a class="navbar-item" th:href="${'techdevDetails.html?cid='+item.tid}" th:if="${qt?.rows!=null}"  th:each="item:${qt?.rows}" th:text="${item?.ttitle}">
                             </a>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                         </a>
 
                         <div class="navbar-dropdown" >
-                            <a class="navbar-item" th:if="${qp?.rows!=null}" th:each="items:${qp?.rows}" th:text="${items?.pname}" th:href="'productDetails.html?cid='+${item?.pid}">
+                            <a class="navbar-item" th:if="${qp?.rows!=null}" th:each="items:${qp?.rows}" th:text="${items?.pname}" th:href="'productDetails.html?cid='+${items?.pid}">
                             </a>
                         </div>
                     </div>
@@ -65,6 +65,18 @@
         </nav>
     </div>
     </div>
+
+    <script>
+        jQuery(function(){
+            $(".navbar-burger").click(function() {
+
+                // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                $(".navbar-burger").toggleClass("is-active");
+                $(".navbar-menu").toggleClass("is-active");
+
+            });
+        })
+    </script>
 
 
 

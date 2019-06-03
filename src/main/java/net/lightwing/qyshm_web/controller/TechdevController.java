@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 @Controller
 public class TechdevController {
 
@@ -39,19 +40,13 @@ public class TechdevController {
         PageInfo pageInfo = new PageInfo(page, limit);
         pageInfo = qTechdevService.selectPageInfo(pageInfo);
         List<QTechdev> qNewsList = pageInfo.getRows();
-        List<QTechdev> qNewsResult = new ArrayList<>();
         for (QTechdev str : qNewsList) {
-            QTechdev qNews = new QTechdev();
             String html = HtmlUtils.Html2Text(str.getTdetail());
             if (html.length() > 20) {
-                qNews.setTdetail(html.substring(0, 20) + "……");
+                str.setTdetail(html.substring(0, 20) + "……");
             } else {
-                qNews.setTdetail(html);
+                str.setTdetail(html);
             }
-            qNews.setCreatetime(str.getCreatetime());
-            qNews.setTtitle(str.getTtitle());
-            qNews.setTid(str.getTid());
-            qNewsResult.add(qNews);
         }
         PageInfo qb = new PageInfo(1, 9);
         qb = qBottommenuService.selectPageInfo(qb);

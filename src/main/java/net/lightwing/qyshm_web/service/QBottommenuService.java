@@ -50,7 +50,10 @@ public class QBottommenuService {
     }
 
     public QBottommenu selectById(Integer bmid) {
-        return qBottommenuDao.selectByPrimaryKey(bmid);
+        Example example = new Example(QBottommenu.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("bmid", bmid);
+        return qBottommenuDao.selectOneByExample(example);
     }
 
     public List<QBottommenu> selectByName(String name) {

@@ -1,15 +1,111 @@
-@media all and (min-width: 769px) {
-    .qCode {
-        margin-right: 1rem;
-    }
-}
-
-@media all and (max-width: 320px) {
+@media all and (min-width: 320px)  {
     .qCode {
         width: 1rem;
         height: 1rem;
     }
+    .navbar-burger{
+        margin-top:1.5rem;
+    }
+    .news{
+        background-image: url('/images/news.png');
+        background-repeat: no-repeat;
+        padding-bottom:10rem;
+        background-size:100% 100%;
+        margin-bottom:3rem;
+    }
+
+    .contact{
+        background-image: url('/images/contact.png');
+        background-repeat: no-repeat;
+        padding-bottom:10rem;
+        background-size:100% 100%;
+        margin-bottom:3rem;
+    }
 }
+
+@media all and (min-width: 769px) {
+    .qCode {
+        margin-right: 1rem;
+    }
+
+    .news{
+        background-image: url('/images/news.png');
+        background-repeat: no-repeat;
+        padding-bottom:20rem;
+        background-size:100% 100%;
+        margin-bottom:3rem;
+    }
+
+    .contact{
+        background-image: url('/images/contact.png');
+        background-repeat: no-repeat;
+        padding-bottom:20rem;
+        background-size:100% 100%;
+        margin-bottom:3rem;
+    }
+
+    /*导航栏样式*/
+    .navbar .navbar-start .navbar-item
+    {
+        height:100%;
+        margin-right:0;
+        /*padding-top:1rem;*/
+        /*padding-bottom:1rem;*/
+        /*width:6rem;*/
+        /*text-align: center;*/
+        padding: 1rem 1.7rem;
+    }
+
+    .navbar .navbar-menu{
+        margin-left:10rem;
+    }
+
+    /*菜单内容居中*/
+    .navbar .navbar-start
+    {
+        text-align:center;
+    }
+
+    /*去除框架内自带边框圆角*/
+    .navbar a.navbar-item{
+        border-radius: 0px;
+    }
+
+    .navbar a{
+        font-weight:700;
+    }
+
+    .navbar .navbar-brand
+    {
+        padding-top:1rem;
+        padding-bottom:1rem;
+    }
+
+    /*hover样式*/
+    .navbar .navbar-item:hover
+    {
+        background: transparent;
+        color:black;
+    }
+
+    /*hover样式*/
+    .is-hoverable
+    {
+        cursor:pointer;
+        background: transparent;
+        color:black;
+    }
+
+    .navbar {
+        /*margin-left:20%;*/
+        background-color:transparent;
+    }
+
+
+
+}
+
+
 
 .bottom {
     clear: both;
@@ -75,59 +171,3 @@ html{
 
 
 
-/*导航栏样式*/
-.navbar .navbar-start .navbar-item
-{
-    height:100%;
-    margin-right:0;
-    /*padding-top:1rem;*/
-    /*padding-bottom:1rem;*/
-    /*width:6rem;*/
-    /*text-align: center;*/
-    padding: 1rem 1.7rem;
-}
-
-.navbar .navbar-menu{
-    margin-left:10rem;
-}
-
-/*菜单内容居中*/
-.navbar .navbar-start
-{
-    text-align:center;
-}
-
-/*去除框架内自带边框圆角*/
-.navbar a.navbar-item{
-    border-radius: 0px;
-}
-
-.navbar a{
-    font-weight:700;
-}
-
-.navbar .navbar-brand
-{
-    padding-top:1rem;
-    padding-bottom:1rem;
-}
-
-/*hover样式*/
-.navbar .navbar-item:hover
-{
-    background: transparent;
-    color:black;
-}
-
-/*hover样式*/
-.is-hoverable
-{
-    cursor:pointer;
-    background: transparent;
-    color:black;
-}
-
-.navbar {
-    /*margin-left:20%;*/
-    background-color:transparent;
-}

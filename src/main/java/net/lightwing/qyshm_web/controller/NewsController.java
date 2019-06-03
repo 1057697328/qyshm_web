@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 @Controller
 public class NewsController {
 
@@ -42,20 +43,13 @@ public class NewsController {
         PageInfo pageInfo = new PageInfo(page, limit);
         pageInfo = qNewsService.selectPageInfo(pageInfo);
         List<QNews> qNewsList = pageInfo.getRows();
-        List<QNews> qNewsResult = new ArrayList<>();
         for (QNews str : qNewsList) {
-            QNews qNews = new QNews();
             String html = HtmlUtils.Html2Text(str.getNdetail());
             if (html.length() > 20) {
-                qNews.setNdetail(html.substring(0, 20) + "……");
+                str.setNdetail(html.substring(0, 20) + "……");
             } else {
-                qNews.setNdetail(html);
+                str.setNdetail(html);
             }
-            qNews.setCreatetime(str.getCreatetime());
-            qNews.setCoverimg(str.getCoverimg());
-            qNews.setNid(str.getNid());
-            qNews.setNtitle(str.getNtitle());
-            qNewsResult.add(qNews);
         }
         PageInfo qb = new PageInfo(1, 9);
         qb = qBottommenuService.selectPageInfo(qb);

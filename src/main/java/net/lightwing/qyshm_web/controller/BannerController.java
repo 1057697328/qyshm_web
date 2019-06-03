@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 @Controller
 public class BannerController {
     @Autowired
@@ -49,6 +50,7 @@ public class BannerController {
         model.addAttribute("PageInfo", pageInfo);
         PageInfo qp = new PageInfo(1,100000);
         qp=qProductService.selectPageInfo(qp);
+        model.addAttribute("pageInfo",pageInfo);
         model.addAttribute("qb", qb);
         model.addAttribute("qc", qc);
         model.addAttribute("qq", qq);
