@@ -36,16 +36,18 @@ public class QBannerController {
 
     @RequestMapping("insert")
     @ResponseBody
-    public Wrapper insert(QBanner qBanner, @RequestParam(value = "imgFile",required = false) MultipartFile file) {
-        if (StringUtils.isNotBlank(file.getOriginalFilename())) {
-            qBanner.setImgpath(null);
-            if (qBanner.getImgpath() != null) {
-                String deletepath = qBanner.getImgpath().substring(1, qBanner.getImgpath().length());
-                UPLOAD.deleteFile(deletepath);
-            }
-            Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
-            if ((int) upload.get("code") == 200) {
-                qBanner.setImgpath("/pictures/" + upload.get("filename"));
+    public Wrapper insert(QBanner qBanner, @RequestParam(value = "imgFile", required = false) MultipartFile file) {
+        if (file != null) {
+            if (StringUtils.isNotBlank(file.getOriginalFilename())) {
+                qBanner.setImgpath(null);
+                if (qBanner.getImgpath() != null) {
+                    String deletepath = qBanner.getImgpath().substring(1, qBanner.getImgpath().length());
+                    UPLOAD.deleteFile(deletepath);
+                }
+                Map<String, Object> upload = UPLOAD.UPLOADFILE(file);
+                if ((int) upload.get("code") == 200) {
+                    qBanner.setImgpath("/pictures/" + upload.get("filename"));
+                }
             }
         }
         qBannerService.insert(qBanner);
@@ -54,8 +56,8 @@ public class QBannerController {
 
     @RequestMapping("update")
     @ResponseBody
-    public Wrapper update(QBanner qBanner, @RequestParam(value = "imgFile",required = false) MultipartFile file) {
-        if(file!=null) {
+    public Wrapper update(QBanner qBanner, @RequestParam(value = "imgFile", required = false) MultipartFile file) {
+        if (file != null) {
             if (StringUtils.isNotBlank(file.getOriginalFilename())) {
                 qBanner.setImgpath(null);
                 if (qBanner.getImgpath() != null) {
@@ -80,7 +82,7 @@ public class QBannerController {
     @ResponseBody
     public Wrapper delete(Integer bid) {
         QBanner qBanner = qBannerService.selectById(bid);
-        if (qBanner.getImgpath()!=null) {
+        if (qBanner.getImgpath() != null) {
             UPLOAD.deleteFile(qBanner.getImgpath());
         }
         qBannerService.delete(bid);
