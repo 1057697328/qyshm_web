@@ -6,10 +6,31 @@
         <result column="ctypename" jdbcType="VARCHAR" property="ctypename"/>
         <result column="showdetail" jdbcType="INTEGER" property="showdetail"/>
     </resultMap>
+
+    <resultMap id="typeWithList" type="net.lightwing.qyshm_web.pojo.QCooptype">
+        <id column="ctypeid" jdbcType="INTEGER" property="ctypeid"/>
+        <result column="ctypename" jdbcType="VARCHAR" property="ctypename"/>
+        <result column="showdetail" jdbcType="INTEGER" property="showdetail"/>
+        <collection property="coops" ofType="net.lightwing.qyshm_web.pojo.QCoop">
+            <id column="cid" jdbcType="INTEGER" property="cid"/>
+            <result column="ctypeid" jdbcType="INTEGER" property="ctypeid"/>
+            <result column="cname" jdbcType="VARCHAR" property="cname"/>
+            <result column="engname" jdbcType="VARCHAR" property="engname"/>
+            <result column="coverimg" jdbcType="VARCHAR" property="coverimg"/>
+            <result column="href" jdbcType="VARCHAR" property="href"/>
+        </collection>
+    </resultMap>
+
     <sql id="Base_Column_List">
     ctypeid, ctypename, showdetail
   </sql>
     <select id="selectPage" resultType="java.util.Map" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include> from q_cooptype
     </select>
+    <select id="getList" resultType="net.lightwing.qyshm_web.pojo.QCooptype">
+        select * from q_cooptype qt
+        inner join q_coop qc on (qc.ctypeid=qt.ctypeid)
+    </select>
+
+
 </mapper>

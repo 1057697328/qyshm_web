@@ -60,4 +60,8 @@ public class QCooptypeService {
         criteria.andEqualTo("ctypeid", cid);
         return qCooptypeDao.selectOneByExample(example);
     }
+
+    public List<QCooptype> getList(){
+        return qCooptypeDao.getList();
+    }
 }

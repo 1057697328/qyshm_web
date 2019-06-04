@@ -1,6 +1,11 @@
 package net.lightwing.qyshm_web.pojo;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * q_cooptype
@@ -16,6 +21,10 @@ public class QCooptype implements Serializable {
 1为不展示详情
      */
     private Integer showdetail;
+
+    @Getter
+    @Setter
+    private List<QCoop> coops;
 
     private static final long serialVersionUID = 1L;
 

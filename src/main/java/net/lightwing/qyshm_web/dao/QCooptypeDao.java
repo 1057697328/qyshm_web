@@ -18,4 +18,11 @@ public interface QCooptypeDao extends BaseMapper<QCooptype> {
      * @return
      */
     List<Map<String, Object>> selectPage(Page page, Map<String, Object> params);
+
+    /**
+     * 获取合作机构类型&合作机构列表
+     * @return
+     */
+    List<QCooptype> getList();
+
 }
