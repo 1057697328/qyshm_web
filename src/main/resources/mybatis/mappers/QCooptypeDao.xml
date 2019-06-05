@@ -5,20 +5,17 @@
         <id column="ctypeid" jdbcType="INTEGER" property="ctypeid"/>
         <result column="ctypename" jdbcType="VARCHAR" property="ctypename"/>
         <result column="showdetail" jdbcType="INTEGER" property="showdetail"/>
+        <collection property="coops" column="ctypeid" select="queryCoop"></collection>
     </resultMap>
 
-    <resultMap id="typeWithList" type="net.lightwing.qyshm_web.pojo.QCooptype">
-        <id column="ctypeid" jdbcType="INTEGER" property="ctypeid"/>
-        <result column="ctypename" jdbcType="VARCHAR" property="ctypename"/>
-        <result column="showdetail" jdbcType="INTEGER" property="showdetail"/>
-        <collection property="coops" ofType="net.lightwing.qyshm_web.pojo.QCoop">
-            <id column="cid" jdbcType="INTEGER" property="cid"/>
-            <result column="ctypeid" jdbcType="INTEGER" property="ctypeid"/>
-            <result column="cname" jdbcType="VARCHAR" property="cname"/>
-            <result column="engname" jdbcType="VARCHAR" property="engname"/>
-            <result column="coverimg" jdbcType="VARCHAR" property="coverimg"/>
-            <result column="href" jdbcType="VARCHAR" property="href"/>
-        </collection>
+    <resultMap id="coopMap" type="net.lightwing.qyshm_web.pojo.QCoop">
+        <id column="cid" jdbcType="INTEGER" property="cid"/>
+        <result column="ctypeid" jdbcType="INTEGER" property="ctypeid"/>
+        <result column="cname" jdbcType="VARCHAR" property="cname"/>
+        <result column="engname" jdbcType="VARCHAR" property="engname"/>
+        <result column="coverimg" jdbcType="VARCHAR" property="coverimg"/>
+        <result column="href" jdbcType="VARCHAR" property="href"/>
+        <result column="ctedail" property="ctedail"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -27,10 +24,11 @@
     <select id="selectPage" resultType="java.util.Map" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include> from q_cooptype
     </select>
-    <select id="getList" resultType="net.lightwing.qyshm_web.pojo.QCooptype">
-        select * from q_cooptype qt
-        inner join q_coop qc on (qc.ctypeid=qt.ctypeid)
+    <select id="getList" resultMap="BaseResultMap">
+        select * from q_cooptype
     </select>
-
+    <select id="queryCoop" resultMap="coopMap">
+        select * from q_coop where ctypeid = #{ctypeid}
+    </select>
 
 </mapper>

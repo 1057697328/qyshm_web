@@ -1,0 +1,131 @@
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="components/header :: header('合作机构')">
+<body>
+<div class="rows">
+    <div class="columns">
+        <div class="column is-full-desktop"
+             style="background-image: url('/images/news.png');background-repeat: no-repeat;padding-bottom:15rem; background-size:100% 100%;margin-bottom:3rem;">
+            <!--导航栏-->
+            <div th:include="components/navbar :: navbar(${qt},${qp})"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div>
+        <h1 style="font-size: 2rem;color: #2f80ba;text-align: center; margin-bottom: 1%;"
+            class="zoujing">合作机构</h1>
+    </div>
+    <div id="xuxian"></div>
+</div>
+<div class="container has-text-centered" style="margin-bottom: 2%;">
+    <div>
+        <div th:each="item:${qCooptypeList}">
+            <h2 th:text="${item?.ctypename}"></h2>
+            <div class="columns is-multiline" style="width: 50%; margin: 0 auto;">
+                <div class="column is-6" th:each="items:${item?.coops}">
+                    <article class="media">
+                        <div class="media-left">
+                            <figure class="image is-128x256">
+                                <img th:src="${items?.coverimg}" th:alt="${items?.cname}"
+                                     style="width: 256px;height: 128px;">
+                            </figure>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <!--        <div style="width: 80%; margin: 0 auto;" th:each="item:${PageInfo.rows}"-->
+        <!--             th:if="${item?.status==1}">-->
+        <!--            <p th:utext="${item?.tdetail}">-->
+
+        <!--            </p>-->
+        <!--        </div>-->
+        <div style="margin-top: 4%;"></div>
+        <div th:each="as:${qCooptypeList}">
+            <div class="columns is-multiline" style="width: 50%; margin: 0 auto;">
+                <div class="column is-6" th:each="items:${as?.coops}">
+                    <div>
+                        <figure class="image is-128x256">
+                            <img th:src="${items?.coverimg}" th:alt="${items?.cname}"
+                                 style="width: 256px;height: 128px;">
+                        </figure>
+                    </div>
+                    <p th:text="${items?.cname}" style="text-align: center;"></p>
+                    <p th:text="${items?.engname}" style="text-align: center;"></p>
+                    <p th:utext="${items?.ctedail.length()>=20?items?.ctedail.substring(0,20)+'……':items?.ctedail}" style="text-align: center;"></p>
+                </div>
+            </div>
+        </div>
+        <!--    <div>-->
+        <!--        <nav class="pagination" role="navigation" aria-label="pagination">-->
+        <!--            <ul class="pagination-list">-->
+
+        <!--            </ul>-->
+        <!--        </nav>-->
+        <!--    </div>-->
+
+
+    </div>
+
+</div>
+
+<div th:include="components/foot :: foot"></div>
+
+<script th:inline="javascript">
+
+    // jQuery(function () {
+    //     onLoad()
+    // });
+    //
+    // function onLoad() {
+    //     //总页数/末页
+    //     var pageCount = [[${(PageInfo.total%PageInfo.size)>0?(PageInfo.total/PageInfo.size)+1:(PageInfo.total/PageInfo.size)}]];
+    //     //当前页
+    //     var pageindex = [[${PageInfo.nowpage}]];
+    //     //上一页
+    //     var prevPage = [[${(PageInfo.nowpage-1)<=1?1:PageInfo.nowpage-1}]];
+    //     //下一页
+    //     var nextPage = (pageindex + 1) >= pageCount ? pageCount : (pageindex + 1);
+    //
+    //     //循环Template
+    //     var template = "<li><a class=\"pagination-link\" href=\"${href}\" aria-label=\"Page\" aria-current=\"page\">${page}</a></li>";
+    //
+    //     var prevTemplate = " <a class=\"pagination-previous\" title=\"上一页\"  href='${prev}'>上一页</a>";
+    //
+    //     var nextTemplate = "<a class=\"pagination-next\" href='${next}'>下一页</a>";
+    //
+    //     prevTemplate = jQuery(prevTemplate);
+    //     nextTemplate = jQuery(nextTemplate);
+    //
+    //     //上一页按钮
+    //     prevTemplate.prop("href", 'news.html?page=' + prevPage);
+    //
+    //     //下一页按钮
+    //     nextTemplate.prop("href", 'news.html?page=' + nextPage);
+    //
+    //     jQuery(".pagination").append(prevTemplate);
+    //     jQuery(".pagination").append(nextTemplate);
+    //
+    //     for (var i = 1; i <= pageCount; i++) {
+    //         var tem = jQuery(template);
+    //         tem.find("a").prop("href", 'news.html?page=' + i);
+    //         tem.find("a").text(i);
+    //         console.info(tem);
+    //
+    //         if (i === pageindex) {
+    //             tem.find("a").addClass("is-current");
+    //         }
+    //         jQuery(".pagination-list").append(tem);
+    //     }
+    //
+    //
+    // }
+</script>
+
+</div>
+</body>
+</html>

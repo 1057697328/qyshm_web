@@ -41,6 +41,7 @@ public class QCoop implements Serializable {
      */
     private String href;
 
+    private String ctedail;
     private QCooptype qCoopType;
 
     private static final long serialVersionUID = 1L;

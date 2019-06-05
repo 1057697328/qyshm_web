@@ -79,7 +79,7 @@ public class TeamController {
      * @param model
      * @return
      */
-    @RequestMapping("selectById")
+    @RequestMapping("teamDetails.html")
     public String selectById(Integer cid, Model model) {
         QTeam qTeam = qTeamService.selectById(cid);
         PageInfo qb = new PageInfo(1, 9);
@@ -88,10 +88,16 @@ public class TeamController {
         qc = qConfigService.selectPageInfo(qc);
         PageInfo qq = new PageInfo(1, 2);
         qq = qQrcodeService.selectPageInfo(qq);
-        model.addAttribute("qCoop", qTeam);
+        PageInfo qt = new PageInfo(1, 100000);
+        qt = qTechdevService.selectPageInfo(qt);
+        PageInfo qp = new PageInfo(1, 100000);
+        qp = qProductService.selectPageInfo(qp);
+        model.addAttribute("qTeam", qTeam);
         model.addAttribute("qb", qb);
         model.addAttribute("qc", qc);
         model.addAttribute("qq", qq);
-        return "";
+        model.addAttribute("qt", qt);
+        model.addAttribute("qp", qp);
+        return "teamDetails";
     }
 }

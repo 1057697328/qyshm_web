@@ -1,0 +1,32 @@
+<!--suppress ALL -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="components/header :: header('技术团队人员详情')">
+<body>
+<div class="rows">
+    <div class="columns">
+        <div class="column is-full-desktop news">
+            <!--导航栏-->
+            <div th:include="components/navbar :: navbar(${qt},${qp})"></div>
+        </div>
+    </div>
+</div>
+<div class="rows">
+    <div class="container">
+        <div>
+            <h1 style="font-size: 30px;color: #7EB0D4;text-align: center;" class="zoujing" th:text="${qTeam?.name}"></h1>
+            <div>
+                <img th:src="${qTeam?.theadimg}" style="width: 200px;height: 200px;">
+            </div>
+        </div>
+        <div id="xuxian"></div>
+        <div style="margin-top: 2%; ">
+            <div style="width: 80%; margin: 0 auto;">
+                <p th:utext="${qTeam?.tdetail}"></p>
+            </div>
+        </div>
+    </div>
+
+    <div th:include="components/foot :: foot"></div>
+</div>
+</body>
+</html>
