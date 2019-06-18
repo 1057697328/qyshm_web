@@ -6,71 +6,77 @@
 <body>
 <div th:fragment="navbar(qt,qp)">
     <div class="container">
-    <div class="content">
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
-                    <img th:src="@{~/images/logo.png}" style="max-height:5rem;" >
-                </a>
-
-                <a role="button" style="margin-top:1.5rem;" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-                   data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-
-            <div class="navbar-menu">
-                <div class="navbar-start menu_a">
-                    <a class="navbar-item"  href="/index.html">
-                         首页
+        <div class="content">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="https://bulma.io">
+                        <img th:src="@{~/images/logo.png}" style="max-height:5rem;">
                     </a>
 
-                    <a class="navbar-item" href="/about.html">
-                         关于起源
+                    <a role="button" style="margin-top:1.5rem;" class="navbar-burger burger" aria-label="menu"
+                       aria-expanded="false"
+                       data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
                     </a>
-
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link" href="/techdev.html">
-                            技术研发
-                        </a>
-
-                        <div class="navbar-dropdown" >
-                            <a class="navbar-item" th:href="${'techdevDetails.html?cid='+item.tid}" th:if="${qt?.rows!=null}"  th:each="item:${qt?.rows}" th:text="${item?.ttitle}">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link" href="/product.html">
-                            产品中心
-                        </a>
-
-                        <div class="navbar-dropdown" >
-                            <a class="navbar-item" th:if="${qp?.rows!=null}" th:each="items:${qp?.rows}" th:text="${items?.pname}" th:href="'productDetails.html?cid='+${items?.pid}">
-                            </a>
-                        </div>
-                    </div>
-                    <a class="navbar-item" href="/team.html">
-                        团队列表
-                    </a>
-                    <a class="navbar-item" href="/news.html">
-                        企业新闻
-                    </a>
-
-                    <a class="navbar-item" href="/contactUs.html">
-                        联系我们
-                    </a>
-
                 </div>
-            </div>
-        </nav>
-    </div>
+
+                <div class="navbar-menu">
+                    <div class="navbar-start menu_a">
+                        <a class="navbar-item" href="/index.html">
+                            首页
+                        </a>
+
+                        <a class="navbar-item" href="/about.html">
+                            关于起源
+                        </a>
+
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <!--/techdev.html-->
+                            <a class="navbar-link" href="#">
+                                技术研发
+                            </a>
+
+                            <div class="navbar-dropdown">
+                                <a class="navbar-item" th:href="${'coop.html'}" th:text="${'研究合作机构'}">
+                                </a>
+                                <a class="navbar-item" th:href="${'team.html'}" th:text="${'技术团队'}">
+                                </a>
+                                <a class="navbar-item" th:href="${'techdevDetails.html?cid='+item.tid}"
+                                   th:if="${qt?.rows!=null}" th:each="item:${qt?.rows}" th:text="${item?.ttitle}">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <!--/product.html-->
+                            <a class="navbar-link" href="#">
+                                产品中心
+                            </a>
+
+                            <div class="navbar-dropdown">
+                                <a class="navbar-item" th:if="${qp?.rows!=null}" th:each="items:${qp?.rows}"
+                                   th:text="${items?.pname}" th:href="'productDetails.html?cid='+${items?.pid}">
+                                </a>
+                            </div>
+                        </div>
+                        <a class="navbar-item" href="/news.html">
+                            企业新闻
+                        </a>
+
+                        <a class="navbar-item" href="/contactUs.html">
+                            联系我们
+                        </a>
+
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <script>
-        jQuery(function(){
-            $(".navbar-burger").click(function() {
+        jQuery(function () {
+            $(".navbar-burger").click(function () {
 
                 // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
                 $(".navbar-burger").toggleClass("is-active");
@@ -81,10 +87,8 @@
     </script>
 
 
-
 </div>
 </body>
-
 
 
 <style>

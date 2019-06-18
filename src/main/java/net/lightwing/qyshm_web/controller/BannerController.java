@@ -34,7 +34,7 @@ public class BannerController {
     private QProductService qProductService;
 
 
-    @RequestMapping("index.html")
+    @RequestMapping(value = {"index.html","/"})
     public String selectWebPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "6") Integer limit, Model model) {
         Map<String, Object> params = new HashMap<>();
         PageInfo pageInfo = new PageInfo(page, limit);

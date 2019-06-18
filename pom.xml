@@ -10,7 +10,7 @@
     </parent>
     <groupId>net.lightwing</groupId>
     <artifactId>qyshm_web</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.8-RELEASE</version>
     <name>qyshm_web</name>
     <description>起源生命科技(深圳)有限公司官网前台端</description>
 

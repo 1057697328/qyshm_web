@@ -6,7 +6,7 @@
         <result column="ttypename" property="ttypename"/>
     </resultMap>
     <sql id="Base_Column_List">
-    ttypeid, ttypename
+    ttypeid, ttypename ,status
   </sql>
 
     <select id="selectPage" resultType="java.util.Map" resultMap="BaseResultMap">

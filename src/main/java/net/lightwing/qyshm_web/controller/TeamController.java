@@ -46,8 +46,8 @@ public class TeamController {
         for (QTeam str : qNewsList) {
             if (str.getStatus()==0){
                 String html = HtmlUtils.Html2Text(str.getTdetail());
-                if (html.length() > 20) {
-                    str.setTdetail(html.substring(0, 20) + "……");
+                if (html.length() > 100) {
+                    str.setTdetail(html.substring(0, 100) + "……");
                 } else {
                     str.setTdetail(html);
                 }

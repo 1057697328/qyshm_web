@@ -17,6 +17,19 @@ public class QTeamtype implements Serializable {
      */
     private String ttypename;
 
+    /**
+     * 1为只展示详情,0为默认循环
+     */
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getTtypeid() {

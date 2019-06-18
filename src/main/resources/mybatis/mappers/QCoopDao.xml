@@ -8,6 +8,7 @@
         <result column="engname" jdbcType="VARCHAR" property="engname"/>
         <result column="coverimg" jdbcType="VARCHAR" property="coverimg"/>
         <result column="href" jdbcType="VARCHAR" property="href"/>
+        <result column="ctedail" jdbcType="VARCHAR" property="ctedail"/>
         <association property="qCoopType" column="ctypeid" select="queryCoopType"></association>
     </resultMap>
     <resultMap id="QCoopTypeMap" type="net.lightwing.qyshm_web.pojo.QCooptype">
@@ -16,7 +17,7 @@
         <result column="showdetail" jdbcType="INTEGER" property="showdetail"/>
     </resultMap>
     <sql id="Base_Column_List">
-    cid, ctypeid, cname, engname, coverimg, href
+    cid, ctypeid, cname, engname, coverimg, href, ctedail
   </sql>
     <select id="selectPage" resultType="java.util.Map" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"></include> from q_coop

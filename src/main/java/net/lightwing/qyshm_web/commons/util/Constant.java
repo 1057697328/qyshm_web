@@ -18,7 +18,7 @@ public class Constant
     /**
      * 域名
      */
-    public static final String DOMAIN="http://127.0.0.1:8080";
+    public static final String DOMAIN="http://www.qyshm.net";
 
     /**
      * 查找的系统设置ID

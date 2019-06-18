@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 @Controller
 public class CoopTypeController {
 
@@ -55,6 +56,18 @@ public class CoopTypeController {
         qt = qTechdevService.selectPageInfo(qt);
         PageInfo qp = new PageInfo(1, 100000);
         qp = qProductService.selectPageInfo(qp);
+
+        for (QCooptype type : qCooptypeList) {
+
+            for (QCoop coop : type.getCoops()) {
+                String html = HtmlUtils.Html2Text(coop.getCtedail());
+                coop.setCtedail(html);
+            }
+
+
+        }
+
+
         model.addAttribute("qCooptypeList", qCooptypeList);
         model.addAttribute("qb", qb);
         model.addAttribute("qc", qc);

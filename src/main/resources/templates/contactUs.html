@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:include="components/header :: header('联系我们')">
 <body>
@@ -20,9 +21,7 @@
     <div id="xuxian"></div>
     <div class="columns is-multiline " style="margin:0 auto;width: 80%" th:each="items:${pageInfo?.rows}">
         <div class="column is-4">
-            <div>
-                <img src="/" alt="1">
-            </div>
+
             <div>
                 <label>
                     全国统一服务热线:
@@ -35,9 +34,7 @@
             </div>
         </div>
         <div class="column is-4">
-            <div>
-                <img src="/" alt="1">
-            </div>
+
             <div>
                 <label>
                     起源生命科技(深圳)有限公司:
@@ -46,9 +43,7 @@
             </div>
         </div>
         <div class="column is-4">
-            <div>
-                <img src="/" alt="1">
-            </div>
+
             <div>
                 <label>
                    电子邮件:
@@ -56,7 +51,7 @@
                 </label><br/>
                 <label>
                     网址:
-                <a th:href="${items?.website}">xxxxxxxxxx</a>
+                <a th:text="${items?.website}">xxxxxxxxxx</a>
                 </label>
             </div>
         </div>
@@ -164,7 +159,7 @@
     }
     //创建一个Icon
     function createIcon(json){
-        var icon = new BMap.Icon("http://app.baidu.com/map/images/us_mk_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+        var icon = new BMap.Icon("http://www.qyshm.net/pictures/marker_icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
         return icon;
     }
 

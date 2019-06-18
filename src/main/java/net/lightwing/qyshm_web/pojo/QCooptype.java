@@ -26,6 +26,14 @@ public class QCooptype implements Serializable {
     @Setter
     private List<QCoop> coops;
 
+    public List<QCoop> getCoops() {
+        return coops;
+    }
+
+    public void setCoops(List<QCoop> coops) {
+        this.coops = coops;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getCtypeid() {

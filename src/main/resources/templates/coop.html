@@ -4,8 +4,7 @@
 <body>
 <div class="rows">
     <div class="columns">
-        <div class="column is-full-desktop"
-             style="background-image: url('/images/news.png');background-repeat: no-repeat;padding-bottom:15rem; background-size:100% 100%;margin-bottom:3rem;">
+        <div class="column is-full-desktop">
             <!--导航栏-->
             <div th:include="components/navbar :: navbar(${qt},${qp})"></div>
         </div>
@@ -16,24 +15,41 @@
 <div class="container">
     <div>
         <h1 style="font-size: 2rem;color: #2f80ba;text-align: center; margin-bottom: 1%;"
-            class="zoujing">合作机构</h1>
+            class="zoujing">研究合作机构</h1>
     </div>
     <div id="xuxian"></div>
 </div>
 <div class="container has-text-centered" style="margin-bottom: 2%;">
     <div>
-        <div th:each="item:${qCooptypeList}">
-            <h2 th:text="${item?.ctypename}"></h2>
+        <div th:each="item:${qCooptypeList}" th:if="${item.showdetail==1}">
+            <h2 style="font-size: 1.8rem;color: #2f80ba;text-align: center; margin-bottom: 1%;" th:text="${item?.ctypename}"></h2>
             <div class="columns is-multiline" style="width: 50%; margin: 0 auto;">
                 <div class="column is-6" th:each="items:${item?.coops}">
                     <article class="media">
                         <div class="media-left">
-                            <figure class="image is-128x256">
+                            <figure class="image">
                                 <img th:src="${items?.coverimg}" th:alt="${items?.cname}"
-                                     style="width: 256px;height: 128px;">
+                                     style="width: 256px;height:256px;">
                             </figure>
                         </div>
                     </article>
+                </div>
+            </div>
+        </div>
+
+
+        <div th:each="itema:${qCooptypeList}" th:if="${itema.showdetail==0}">
+            <h2 style="font-size: 1.8rem;color: #2f80ba;text-align: center; margin-bottom: 1%;" th:text="${item?.ctypename}"></h2>
+            <div class="columns is-multiline">
+                <div class="column is-6" th:each="items:${itema?.coops}">
+                    <div>
+                        <img th:src="${items?.coverimg}" th:alt="${items?.cname}" style="width: 256px;height:128px;" />
+                    </div>
+                    <div>
+                        <p style="color: #2f80ba;" th:text="${items?.cname}"></p>
+                        <p style="color: #2f80ba;" th:text="${items?.engname}"></p>
+                        <p th:text="${items?.ctedail}"></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,22 +60,7 @@
 
         <!--            </p>-->
         <!--        </div>-->
-        <div style="margin-top: 4%;"></div>
-        <div th:each="as:${qCooptypeList}">
-            <div class="columns is-multiline" style="width: 50%; margin: 0 auto;">
-                <div class="column is-6" th:each="items:${as?.coops}">
-                    <div>
-                        <figure class="image is-128x256">
-                            <img th:src="${items?.coverimg}" th:alt="${items?.cname}"
-                                 style="width: 256px;height: 128px;">
-                        </figure>
-                    </div>
-                    <p th:text="${items?.cname}" style="text-align: center;"></p>
-                    <p th:text="${items?.engname}" style="text-align: center;"></p>
-                    <p th:utext="${items?.ctedail.length()>=20?items?.ctedail.substring(0,20)+'……':items?.ctedail}" style="text-align: center;"></p>
-                </div>
-            </div>
-        </div>
+
         <!--    <div>-->
         <!--        <nav class="pagination" role="navigation" aria-label="pagination">-->
         <!--            <ul class="pagination-list">-->
