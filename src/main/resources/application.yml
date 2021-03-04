@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/qyshm_db?useUnicode=true&allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://db.qingwing.cn:10126/qyshm_db?useUnicode=true&allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
     username: root
     password: Chao201019!!
   resources:
@@ -21,4 +21,4 @@ logging:
   level:
     net.lightwing.qyshm_web.dao: DEBUG
 server:
-  port: 7001
+  port: 7101
